@@ -9,27 +9,44 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
+import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
 import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
 
 @Dao
-public interface WeeklyMenuDao {
+public abstract class WeeklyMenuDao {
+
+    public void insertWeeklyMenuAndDailyMenus(WeeklyMenu weeklyMenuAndDailyMenus) {
+        long weeklyMenuId = insert(weeklyMenuAndDailyMenus);
+        List<DailyMenu> dailyMenus = weeklyMenuAndDailyMenus.getDailyMenus();
+        // Make sure that daily menus have been created.
+        if(dailyMenus != null) {
+            for (int i = 0; i < dailyMenus.size(); i++) {
+                dailyMenus.get(i).setMenuId((int) weeklyMenuId);
+            }
+            _insert(dailyMenus);
+        }
+    }
+
+    @Insert
+    abstract void _insert(List<DailyMenu> dailyMenus);
+
     //CREATE
     @Insert
-    void insert(WeeklyMenu weeklyMenu);
+    public abstract long insert(WeeklyMenu weeklyMenu);
 
     //DELETE
     @Query("DELETE FROM weekly_menu_table")
-    void deleteAll();
+    public abstract void deleteAll();
 
     //Read
     @Query("SELECT * from weekly_menu_table ORDER BY mStartDate desc")
-    LiveData<List<WeeklyMenu>> getWeeklyMenus();
+    public abstract LiveData<List<WeeklyMenu>> getWeeklyMenus();
 
     //Read
     @Query("SELECT * from weekly_menu_table WHERE mId=:menuId ORDER BY mStartDate desc")
-    LiveData<List<WeeklyMenu>> getWeeklyMenuById(int menuId);
+    public abstract LiveData<List<WeeklyMenu>> getWeeklyMenuById(int menuId);
 
     //Delete
     @Delete
-    void delete(WeeklyMenu weeklyMenu);
+    public abstract void delete(WeeklyMenu weeklyMenu);
 }

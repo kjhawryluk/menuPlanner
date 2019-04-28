@@ -2,6 +2,7 @@ package edu.uchicago.kjhawryluk.prolistview.Models;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
@@ -28,11 +29,12 @@ public class DailyMenu {
     private String mUrl;
     @TypeConverters({DateConverter.class})
     private Date mDate;
+    @Ignore
+    private List<Ingredient> mIngredients;
 
     public DailyMenu() {}
 
-    public DailyMenu(int menuId, Date date) {
-        mMenuId = menuId;
+    public DailyMenu(Date date) {
         mDate = date;
     }
 
@@ -76,5 +78,11 @@ public class DailyMenu {
         this.mUrl = url;
     }
 
+    public List<Ingredient> getIngredients() {
+        return mIngredients;
+    }
 
+    public void setIngredients(List<Ingredient> ingredients) {
+        mIngredients = ingredients;
+    }
 }

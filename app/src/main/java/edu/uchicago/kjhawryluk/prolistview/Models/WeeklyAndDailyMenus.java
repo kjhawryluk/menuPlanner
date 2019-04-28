@@ -26,32 +26,32 @@ public class WeeklyAndDailyMenus {
         mDailyMenus = new ArrayList<>();
     }
 
-    public void generateDailyMenus() {
-        if(mDailyMenus == null){
-            mDailyMenus = new ArrayList<>();
-        }
-
-        Date dayDate = new Date(mWeeklyMenu.getStartDate().getTime());
-        for (int i = 0; i < 7; i++) {
-            mDailyMenus.add(new DailyMenuAndIngredients(mWeeklyMenu.getId(), dayDate));
-            dayDate = addDays(dayDate, 1);
-        }
-    }
-
-    /**
-     * Adds a given number of days to a date.
-     * https://stackoverflow.com/questions/428918/how-can-i-increment-a-date-by-one-day-in-java
-     *
-     * @param date
-     * @param days
-     * @return
-     */
-    public static Date addDays(Date date, int days) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.add(Calendar.DATE, days); //minus number would decrement the days
-        return cal.getTime();
-    }
+//    public void generateDailyMenus() {
+//        if(mDailyMenus == null){
+//            mDailyMenus = new ArrayList<>();
+//        }
+//
+//        Date dayDate = new Date(mWeeklyMenu.getStartDate().getTime());
+//        for (int i = 0; i < 7; i++) {
+//            mDailyMenus.add(new DailyMenuAndIngredients(mWeeklyMenu.getId(), dayDate));
+//            dayDate = addDays(dayDate, 1);
+//        }
+//    }
+//
+//    /**
+//     * Adds a given number of days to a date.
+//     * https://stackoverflow.com/questions/428918/how-can-i-increment-a-date-by-one-day-in-java
+//     *
+//     * @param date
+//     * @param days
+//     * @return
+//     */
+//    public static Date addDays(Date date, int days) {
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(date);
+//        cal.add(Calendar.DATE, days); //minus number would decrement the days
+//        return cal.getTime();
+//    }
 
     public WeeklyMenu getWeeklyMenu() {
         return mWeeklyMenu;

@@ -28,10 +28,10 @@ public class DailyMenuAndIngredients {
         mIngredients = new ArrayList<>();
     }
 
-    public DailyMenuAndIngredients(int menuId, Date mDailyMenuDate) {
-        mDailyMenu = new DailyMenu(menuId, mDailyMenuDate);
-        mIngredients = new ArrayList<>();
-    }
+//    public DailyMenuAndIngredients(int menuId, Date mDailyMenuDate) {
+//       // mDailyMenu = new DailyMenu(menuId, mDailyMenuDate);
+//        mIngredients = new ArrayList<>();
+//    }
 
     public DailyMenu getDailyMenu() {
         return mDailyMenu;

@@ -22,7 +22,8 @@ public class Ingredient {
     private int mQuantity;
     private boolean currentlyOwn;
 
-    public Ingredient(String name) {
+    public Ingredient(int dailyMenuId, String name) {
+        mDailyMenuId = dailyMenuId;
         mName = name;
         // By default assume they need 1 of an ingredient.
         mQuantity = 1;

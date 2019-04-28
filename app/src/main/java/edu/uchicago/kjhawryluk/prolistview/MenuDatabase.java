@@ -81,19 +81,21 @@ public abstract class MenuDatabase extends RoomDatabase {
             Calendar cal = Calendar.getInstance();
             cal.set(2019,1,1);
             Date startDate = cal.getTime();
-            WeeklyAndDailyMenus weeklyMenu = new WeeklyAndDailyMenus();
-            weeklyMenu.getWeeklyMenu().setStartDate(startDate);
+            WeeklyMenu weeklyMenu = new WeeklyMenu();
+            weeklyMenu.setStartDate(startDate);
             weeklyMenu.generateDailyMenus();
+            mWeeklyMenuDao.insertWeeklyMenuAndDailyMenus(weeklyMenu);
+            final DailyMenu dayOne = weeklyMenu.getDailyMenus().get(0);
+
             List<Ingredient> ingredients = new ArrayList<Ingredient>(){
                 {
-                    add(new Ingredient("pizza"));
-                    add(new Ingredient("chips"));
+                    add(new Ingredient(dayOne.getId(),"pizza"));
+                    add(new Ingredient(dayOne.getId(),"chips"));
                 }
             };
-            DailyMenuAndIngredients dayOne = weeklyMenu.getDailyMenus().get(0);
-            dayOne.getDailyMenu().setTitle("Pizza!");
+            dayOne.setTitle("Pizza!");
             dayOne.setIngredients(ingredients);
-           // mDao.insert(weeklyMenu);
+            mDailyMenuDao.update(dayOne);
             return null;
         }
     }

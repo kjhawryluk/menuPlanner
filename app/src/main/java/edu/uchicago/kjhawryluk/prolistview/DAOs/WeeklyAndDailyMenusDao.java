@@ -23,7 +23,7 @@ public abstract class WeeklyAndDailyMenusDao {
     @Transaction
     public void insert(WeeklyAndDailyMenus weeklyAndDailyMenus){
         insert(weeklyAndDailyMenus.getWeeklyMenu());
-        insert(weeklyAndDailyMenus.getDailyMenus());
+    //    insert(weeklyAndDailyMenus.getDailyMenus());
     }
 
     @Query("SELECT * FROM weekly_menu_table where mId =:menuId")

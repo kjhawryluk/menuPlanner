@@ -17,7 +17,7 @@ import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
 import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyAndDailyMenus;
 import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
 
-public class MenuRepositiory {
+public class MenuRepository {
     private WeeklyMenuDao mWeeklyMenuDao;
     private DailyMenuDao mDailyMenuDao;
     private IngredientDao mIngredientDao;
@@ -34,13 +34,13 @@ public class MenuRepositiory {
     private LiveData<List<Ingredient>> mIngredients;
 
 
-    MenuRepositiory(Application application) {
+    MenuRepository(Application application) {
         MenuDatabase db = MenuDatabase.getDatabase(application);
         mWeeklyMenuDao = db.weeklyMenuDao();
         mDailyMenuDao = db.dailyMenuDao();
         mIngredientDao = db.ingredientDao();
-        mDailyMenuAndIngredientsDao = db.dailyMenuAndIngredients();
-        mWeeklyAndDailyMenusDao = db.weeklyAndDailyMenus();
+//        mDailyMenuAndIngredientsDao = db.mDailyMenuAndIngredientsDao();
+//        mWeeklyAndDailyMenusDao = db.mWeeklyAndDailyMenusDao();
         mAllMenus = mWeeklyMenuDao.getWeeklyMenus();
     }
 

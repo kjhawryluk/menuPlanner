@@ -7,11 +7,11 @@ import android.support.annotation.NonNull;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
-@Entity(tableName = "ingredient_table")
 //        foreignKeys = @ForeignKey(entity = DailyMenu.class,
 //        parentColumns = "mId",
 //        childColumns = "mDailyMenuId",
 //        onDelete = CASCADE))
+@Entity(tableName = "ingredient_table")
 public class Ingredient {
 
     @PrimaryKey(autoGenerate = true)
@@ -58,6 +58,15 @@ public class Ingredient {
     }
 
 
+    public void setId(int id) {
+        mId = id;
+    }
 
+    public int getDailyMenuId() {
+        return mDailyMenuId;
+    }
 
+    public void setDailyMenuId(int dailyMenuId) {
+        mDailyMenuId = dailyMenuId;
+    }
 }

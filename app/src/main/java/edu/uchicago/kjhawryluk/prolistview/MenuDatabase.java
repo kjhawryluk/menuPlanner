@@ -33,8 +33,8 @@ public abstract class MenuDatabase extends RoomDatabase {
     public abstract WeeklyMenuDao weeklyMenuDao();
     public abstract DailyMenuDao dailyMenuDao();
     public abstract IngredientDao ingredientDao();
-    public abstract DailyMenuAndIngredientsDao dailyMenuAndIngredients();
-    public abstract WeeklyAndDailyMenusDao weeklyAndDailyMenus();
+//    public abstract DailyMenuAndIngredientsDao mDailyMenuAndIngredientsDao();
+//    public abstract WeeklyAndDailyMenusDao mWeeklyAndDailyMenusDao();
 
     private static volatile MenuDatabase INSTANCE;
 
@@ -65,10 +65,14 @@ public abstract class MenuDatabase extends RoomDatabase {
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
-        private final WeeklyAndDailyMenusDao mDao;
+        private final WeeklyMenuDao mWeeklyMenuDao;
+        private final DailyMenuDao mDailyMenuDao;
+        private final IngredientDao mIngredientDao;
 
         PopulateDbAsync(MenuDatabase db) {
-            mDao = db.weeklyAndDailyMenus();
+            mWeeklyMenuDao = db.weeklyMenuDao();
+            mDailyMenuDao = db.dailyMenuDao();
+            mIngredientDao = db.ingredientDao();
         }
 
         @Override
@@ -77,7 +81,9 @@ public abstract class MenuDatabase extends RoomDatabase {
             Calendar cal = Calendar.getInstance();
             cal.set(2019,1,1);
             Date startDate = cal.getTime();
-            WeeklyAndDailyMenus weeklyMenu = new WeeklyAndDailyMenus(startDate);
+            WeeklyAndDailyMenus weeklyMenu = new WeeklyAndDailyMenus();
+            weeklyMenu.getWeeklyMenu().setStartDate(startDate);
+            weeklyMenu.generateDailyMenus();
             List<Ingredient> ingredients = new ArrayList<Ingredient>(){
                 {
                     add(new Ingredient("pizza"));
@@ -87,7 +93,7 @@ public abstract class MenuDatabase extends RoomDatabase {
             DailyMenuAndIngredients dayOne = weeklyMenu.getDailyMenus().get(0);
             dayOne.getDailyMenu().setTitle("Pizza!");
             dayOne.setIngredients(ingredients);
-            mDao.insert(weeklyMenu);
+           // mDao.insert(weeklyMenu);
             return null;
         }
     }

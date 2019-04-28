@@ -13,7 +13,7 @@ import java.util.List;
 import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
 import edu.uchicago.kjhawryluk.prolistview.R;
 
-public class WeeklyMenuAdaptor extends RecyclerView.Adapter<WeeklyMenuAdaptor.WeeklyMenuViewHolder> {
+public class MenuListAdaptor extends RecyclerView.Adapter<MenuListAdaptor.WeeklyMenuViewHolder> {
 
     class WeeklyMenuViewHolder extends RecyclerView.ViewHolder {
         private final TextView mMenuDate;
@@ -27,7 +27,7 @@ public class WeeklyMenuAdaptor extends RecyclerView.Adapter<WeeklyMenuAdaptor.We
     private final LayoutInflater mInflater;
     private List<WeeklyMenu> mMenus; // Cached copy of menus
 
-    WeeklyMenuAdaptor(Context context) { mInflater = LayoutInflater.from(context); }
+    public MenuListAdaptor(Context context) { mInflater = LayoutInflater.from(context); }
 
     @Override
     public WeeklyMenuViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -48,7 +48,7 @@ public class WeeklyMenuAdaptor extends RecyclerView.Adapter<WeeklyMenuAdaptor.We
         }
     }
 
-    void setWords(List<WeeklyMenu> menus){
+    public void setMenus(List<WeeklyMenu> menus){
         mMenus = menus;
         notifyDataSetChanged();
     }

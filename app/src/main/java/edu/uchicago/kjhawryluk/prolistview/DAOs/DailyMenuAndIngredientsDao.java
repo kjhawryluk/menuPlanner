@@ -26,6 +26,7 @@ public abstract class DailyMenuAndIngredientsDao {
         insert(dailyMenusAndIngredients.getIngredients());
     }
 
+    @Transaction
     @Query("SELECT * FROM daily_menu_table where mId =:dailyMenuId")
     public abstract LiveData<List<DailyMenuAndIngredients>> getDailyMenu(int dailyMenuId);
 }

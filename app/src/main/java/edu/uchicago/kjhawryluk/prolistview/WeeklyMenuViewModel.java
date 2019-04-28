@@ -10,13 +10,13 @@ import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyAndDailyMenus;
 import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
 
 public class WeeklyMenuViewModel extends AndroidViewModel {
-    private MenuRepositiory mRepository;
+    private MenuRepository mRepository;
 
     private LiveData<List<WeeklyMenu>> mAllMenus;
 
     public WeeklyMenuViewModel (Application application) {
         super(application);
-        mRepository = new MenuRepositiory(application);
+        mRepository = new MenuRepository(application);
         mAllMenus = mRepository.getAllMenus();
     }
 

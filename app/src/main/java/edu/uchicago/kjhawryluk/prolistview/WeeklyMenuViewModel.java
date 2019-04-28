@@ -6,7 +6,6 @@ import android.arch.lifecycle.LiveData;
 
 import java.util.List;
 
-import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyAndDailyMenus;
 import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
 
 public class WeeklyMenuViewModel extends AndroidViewModel {
@@ -22,5 +21,5 @@ public class WeeklyMenuViewModel extends AndroidViewModel {
 
     LiveData<List<WeeklyMenu>> getAllMenus() { return mAllMenus; }
 
-    public void insert(WeeklyAndDailyMenus menu) { mRepository.insert(menu); }
+    public void insert(WeeklyMenu menu) { mRepository.insert(menu); }
 }

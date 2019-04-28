@@ -14,15 +14,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import edu.uchicago.kjhawryluk.prolistview.DAOs.DailyMenuAndIngredientsDao;
 import edu.uchicago.kjhawryluk.prolistview.DAOs.DailyMenuDao;
 import edu.uchicago.kjhawryluk.prolistview.DAOs.IngredientDao;
-import edu.uchicago.kjhawryluk.prolistview.DAOs.WeeklyAndDailyMenusDao;
 import edu.uchicago.kjhawryluk.prolistview.DAOs.WeeklyMenuDao;
 import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
-import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenuAndIngredients;
 import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
-import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyAndDailyMenus;
 import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
 
 @Database(entities = {

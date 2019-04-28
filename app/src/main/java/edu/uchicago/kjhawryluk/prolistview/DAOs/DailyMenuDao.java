@@ -10,7 +10,6 @@ import android.arch.persistence.room.Update;
 import java.util.List;
 
 import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
-import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenuAndIngredients;
 import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
 
 @Dao

@@ -16,7 +16,8 @@ public interface IngredientDao {
     @Insert
     void insert(Ingredient ingredient);
 
-
+    @Insert
+    void insert(List<Ingredient> ingredient);
 
     //DELETE
     @Query("DELETE FROM ingredient_table")

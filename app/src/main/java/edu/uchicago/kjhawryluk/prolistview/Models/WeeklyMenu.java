@@ -39,9 +39,11 @@ public class WeeklyMenu {
     public void setStartDate(Date startDate) {
         mStartDate = startDate;
     }
-    public WeeklyMenu() { }
+    public WeeklyMenu() {}
+
     public WeeklyMenu(Date startDate) {
         mStartDate = startDate;
+        generateDailyMenus();
     }
 
     public List<DailyMenu> getDailyMenus() {
@@ -52,7 +54,7 @@ public class WeeklyMenu {
         mDailyMenus = dailyMenus;
     }
 
-    public void generateDailyMenus() {
+    private void generateDailyMenus() {
         if(mDailyMenus == null){
             mDailyMenus = new ArrayList<>();
         }
@@ -72,7 +74,7 @@ public class WeeklyMenu {
      * @param days
      * @return
      */
-    public static Date addDays(Date date, int days) {
+    private static Date addDays(Date date, int days) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.add(Calendar.DATE, days); //minus number would decrement the days

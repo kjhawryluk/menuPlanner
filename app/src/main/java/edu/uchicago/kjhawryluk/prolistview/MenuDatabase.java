@@ -29,8 +29,6 @@ public abstract class MenuDatabase extends RoomDatabase {
     public abstract WeeklyMenuDao weeklyMenuDao();
     public abstract DailyMenuDao dailyMenuDao();
     public abstract IngredientDao ingredientDao();
-//    public abstract DailyMenuAndIngredientsDao mDailyMenuAndIngredientsDao();
-//    public abstract WeeklyAndDailyMenusDao mWeeklyAndDailyMenusDao();
 
     private static volatile MenuDatabase INSTANCE;
 
@@ -77,9 +75,7 @@ public abstract class MenuDatabase extends RoomDatabase {
             Calendar cal = Calendar.getInstance();
             cal.set(2019,1,1);
             Date startDate = cal.getTime();
-            WeeklyMenu weeklyMenu = new WeeklyMenu();
-            weeklyMenu.setStartDate(startDate);
-            weeklyMenu.generateDailyMenus();
+            WeeklyMenu weeklyMenu = new WeeklyMenu(startDate);
             mWeeklyMenuDao.insertWeeklyMenuAndDailyMenus(weeklyMenu);
             final DailyMenu dayOne = weeklyMenu.getDailyMenus().get(0);
 
@@ -89,6 +85,7 @@ public abstract class MenuDatabase extends RoomDatabase {
                     add(new Ingredient(dayOne.getId(),"chips"));
                 }
             };
+            mIngredientDao.insert(ingredients);
             dayOne.setTitle("Pizza!");
             dayOne.setIngredients(ingredients);
             mDailyMenuDao.update(dayOne);

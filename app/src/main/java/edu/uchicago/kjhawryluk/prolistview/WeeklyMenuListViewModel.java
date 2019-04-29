@@ -8,12 +8,12 @@ import java.util.List;
 
 import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
 
-public class WeeklyMenuViewModel extends AndroidViewModel {
+public class WeeklyMenuListViewModel extends AndroidViewModel {
     private MenuRepository mRepository;
 
     private LiveData<List<WeeklyMenu>> mAllMenus;
 
-    public WeeklyMenuViewModel (Application application) {
+    public WeeklyMenuListViewModel(Application application) {
         super(application);
         mRepository = new MenuRepository(application);
         mAllMenus = mRepository.getAllMenus();

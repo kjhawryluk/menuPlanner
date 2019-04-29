@@ -5,7 +5,6 @@ import android.content.Context;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -14,7 +13,7 @@ import java.util.List;
 
 import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
 import edu.uchicago.kjhawryluk.prolistview.R;
-import edu.uchicago.kjhawryluk.prolistview.WeeklyMenuViewModel;
+import edu.uchicago.kjhawryluk.prolistview.WeeklyMenuListViewModel;
 
 public class MenuListAdaptor extends RecyclerView.Adapter<MenuListAdaptor.WeeklyMenuViewHolder> {
 
@@ -31,12 +30,12 @@ public class MenuListAdaptor extends RecyclerView.Adapter<MenuListAdaptor.Weekly
 
     private final LayoutInflater mInflater;
     private List<WeeklyMenu> mMenus; // Cached copy of menus
-    private WeeklyMenuViewModel mWeeklyMenuViewModel;
+    private WeeklyMenuListViewModel mWeeklyMenuListViewModel;
 
-    public MenuListAdaptor(Context context, WeeklyMenuViewModel weeklyMenuViewModel)
+    public MenuListAdaptor(Context context, WeeklyMenuListViewModel weeklyMenuListViewModel)
     {
         mInflater = LayoutInflater.from(context);
-        mWeeklyMenuViewModel = weeklyMenuViewModel;
+        mWeeklyMenuListViewModel = weeklyMenuListViewModel;
     }
 
     @Override
@@ -55,7 +54,7 @@ public class MenuListAdaptor extends RecyclerView.Adapter<MenuListAdaptor.Weekly
             holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mWeeklyMenuViewModel.delete(current);
+                    mWeeklyMenuListViewModel.delete(current);
                 }
             });
         } else {

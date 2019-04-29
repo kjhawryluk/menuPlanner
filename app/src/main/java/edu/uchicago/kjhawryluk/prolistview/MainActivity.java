@@ -1,6 +1,5 @@
 package edu.uchicago.kjhawryluk.prolistview;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -18,21 +17,17 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.DatePicker;
-import android.widget.EditText;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 
 import edu.uchicago.kjhawryluk.prolistview.Adaptors.MenuListAdaptor;
 import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
 
 public class MainActivity extends AppCompatActivity {
-    private WeeklyMenuViewModel mWeeklyMenuViewModel;
+    private WeeklyMenuListViewModel mWeeklyMenuListViewModel;
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
@@ -41,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView weeklyMenuListRecycler = findViewById(R.id.weeklyMenuList);
-        mWeeklyMenuViewModel = ViewModelProviders.of(this).get(WeeklyMenuViewModel.class);
-        final MenuListAdaptor adapter = new MenuListAdaptor(this, mWeeklyMenuViewModel);
+        mWeeklyMenuListViewModel = ViewModelProviders.of(this).get(WeeklyMenuListViewModel.class);
+        final MenuListAdaptor adapter = new MenuListAdaptor(this, mWeeklyMenuListViewModel);
         weeklyMenuListRecycler.setAdapter(adapter);
         weeklyMenuListRecycler.setLayoutManager(new LinearLayoutManager(this));
 
-        mWeeklyMenuViewModel.getAllMenus().observe(this, new Observer<List<WeeklyMenu>>() {
+        mWeeklyMenuListViewModel.getAllMenus().observe(this, new Observer<List<WeeklyMenu>>() {
             @Override
             public void onChanged(@Nullable final List<WeeklyMenu> menus) {
                 // Update the cached copy of the words in the adapter.
@@ -87,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 WeeklyMenu weeklyMenu = new WeeklyMenu(new Date(startDateCalendarView.getDate()));
-                mWeeklyMenuViewModel.insert(weeklyMenu);
+                mWeeklyMenuListViewModel.insert(weeklyMenu);
                 dialog.dismiss();
             }
         });

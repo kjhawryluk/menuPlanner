@@ -17,18 +17,18 @@ public class WeeklyMenu {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    private int mId;
+    private Integer mId;
     @TypeConverters({DateConverter.class})
     private Date mStartDate;
 
     @Ignore
     private List<DailyMenu> mDailyMenus;
 
-    public int getId() {
+    public Integer getId() {
         return mId;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         mId = id;
     }
 

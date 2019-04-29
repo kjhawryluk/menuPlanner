@@ -39,7 +39,8 @@ public abstract class MenuDatabase extends RoomDatabase {
                     // Create database here
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             MenuDatabase.class, "menu_database")
-                            .addCallback(sMenuDatabaseCallback)
+                            .fallbackToDestructiveMigration()
+                           // .addCallback(sMenuDatabaseCallback)
                             .build();
                 }
             }

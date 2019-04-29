@@ -1,23 +1,32 @@
 package edu.uchicago.kjhawryluk.prolistview;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.DatePicker;
+import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import edu.uchicago.kjhawryluk.prolistview.Adaptors.MenuListAdaptor;
 import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
@@ -32,11 +41,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView weeklyMenuListRecycler = findViewById(R.id.weeklyMenuList);
-        final MenuListAdaptor adapter = new MenuListAdaptor(this);
+        mWeeklyMenuViewModel = ViewModelProviders.of(this).get(WeeklyMenuViewModel.class);
+        final MenuListAdaptor adapter = new MenuListAdaptor(this, mWeeklyMenuViewModel);
         weeklyMenuListRecycler.setAdapter(adapter);
         weeklyMenuListRecycler.setLayoutManager(new LinearLayoutManager(this));
 
-        mWeeklyMenuViewModel = ViewModelProviders.of(this).get(WeeklyMenuViewModel.class);
         mWeeklyMenuViewModel.getAllMenus().observe(this, new Observer<List<WeeklyMenu>>() {
             @Override
             public void onChanged(@Nullable final List<WeeklyMenu> menus) {
@@ -49,15 +58,53 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        //fab.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
 
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, NewWordActivity.class);
-//                startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
-//            }
-  //      });
+            @Override
+            public void onClick(View view) {
+                createNewMenu();
+            }
+        });
     }
+
+    private void createNewMenu() {
+        // custom dialog
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.fragment_create_new_menu);
+        final CalendarView startDateCalendarView =  dialog.findViewById(R.id.startDateCalendarView);
+
+        //Update date when a new one is selected.
+        startDateCalendarView.setOnDateChangeListener( new CalendarView.OnDateChangeListener() {
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                Calendar selectedDate = new GregorianCalendar( year, month, dayOfMonth );
+                startDateCalendarView.setDate(selectedDate.getTimeInMillis());
+            }
+        });
+        Button newMenuButton = dialog.findViewById(R.id.newMenuButton);
+
+        newMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WeeklyMenu weeklyMenu = new WeeklyMenu(new Date(startDateCalendarView.getDate()));
+                mWeeklyMenuViewModel.insert(weeklyMenu);
+                dialog.dismiss();
+            }
+        });
+
+        //Set up cancel button.
+        Button buttonCancel = dialog.findViewById(R.id.cancelNewMenuButton);
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

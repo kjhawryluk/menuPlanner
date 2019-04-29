@@ -3,6 +3,7 @@ package edu.uchicago.kjhawryluk.prolistview;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.List;
 
@@ -60,6 +61,10 @@ public class MenuRepository {
         mIngredients = ingredients;
     }
 
+    public void delete(WeeklyMenu weeklyAndDailyMenu){
+        new deleteWeeklyAndDailyMenusAsyncTask(mWeeklyMenuDao).execute(weeklyAndDailyMenu);
+    }
+
     public void insert (WeeklyMenu weeklyAndDailyMenu) {
         new insertWeeklyAndDailyMenusAsyncTask(mWeeklyMenuDao).execute(weeklyAndDailyMenu);
     }
@@ -74,7 +79,22 @@ public class MenuRepository {
 
         @Override
         protected Void doInBackground(final WeeklyMenu... params) {
-            mAsyncTaskDao.insert(params[0]);
+            mAsyncTaskDao.insertWeeklyMenuAndDailyMenus(params[0]);
+            return null;
+        }
+    }
+
+    private static class deleteWeeklyAndDailyMenusAsyncTask extends AsyncTask<WeeklyMenu, Void, Void> {
+
+        private WeeklyMenuDao mAsyncTaskDao;
+
+        deleteWeeklyAndDailyMenusAsyncTask(WeeklyMenuDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final WeeklyMenu... params) {
+            mAsyncTaskDao.delete(params[0]);
             return null;
         }
     }

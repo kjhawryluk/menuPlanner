@@ -5,29 +5,39 @@ import android.content.Context;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
-        import android.widget.TextView;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
 import edu.uchicago.kjhawryluk.prolistview.R;
+import edu.uchicago.kjhawryluk.prolistview.WeeklyMenuViewModel;
 
 public class MenuListAdaptor extends RecyclerView.Adapter<MenuListAdaptor.WeeklyMenuViewHolder> {
 
     class WeeklyMenuViewHolder extends RecyclerView.ViewHolder {
         private final TextView mMenuDate;
+        private final ImageButton mDeleteButton;
 
         private WeeklyMenuViewHolder(View itemView) {
             super(itemView);
             mMenuDate = itemView.findViewById(R.id.menuDate);
+            mDeleteButton = itemView.findViewById(R.id.removeMenu);
         }
     }
 
     private final LayoutInflater mInflater;
     private List<WeeklyMenu> mMenus; // Cached copy of menus
+    private WeeklyMenuViewModel mWeeklyMenuViewModel;
 
-    public MenuListAdaptor(Context context) { mInflater = LayoutInflater.from(context); }
+    public MenuListAdaptor(Context context, WeeklyMenuViewModel weeklyMenuViewModel)
+    {
+        mInflater = LayoutInflater.from(context);
+        mWeeklyMenuViewModel = weeklyMenuViewModel;
+    }
 
     @Override
     public WeeklyMenuViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -38,10 +48,16 @@ public class MenuListAdaptor extends RecyclerView.Adapter<MenuListAdaptor.Weekly
     @Override
     public void onBindViewHolder(WeeklyMenuViewHolder holder, int position) {
         if (mMenus != null) {
-            WeeklyMenu current = mMenus.get(position);
+            final WeeklyMenu current = mMenus.get(position);
             SimpleDateFormat formatter = new SimpleDateFormat("E, MMM dd, yyyy");
             String strStartDate = formatter.format(current.getStartDate());
             holder.mMenuDate.setText(strStartDate);
+            holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mWeeklyMenuViewModel.delete(current);
+                }
+            });
         } else {
             // Covers the case of data not being ready yet.
             holder.mMenuDate.setText("No Menus");

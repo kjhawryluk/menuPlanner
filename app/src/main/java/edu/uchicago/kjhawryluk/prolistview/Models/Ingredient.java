@@ -1,11 +1,8 @@
 package edu.uchicago.kjhawryluk.prolistview.Models;
 
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
-
-import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 //        foreignKeys = @ForeignKey(entity = DailyMenu.class,
 //        parentColumns = "mId",
@@ -16,13 +13,14 @@ public class Ingredient {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    private int mId;
-    private int mDailyMenuId;
+    private Integer mId;
+    @NonNull
+    private Integer mDailyMenuId;
     private String mName;
     private int mQuantity;
     private boolean currentlyOwn;
 
-    public Ingredient(int dailyMenuId, String name) {
+    public Ingredient(Integer dailyMenuId, String name) {
         mDailyMenuId = dailyMenuId;
         mName = name;
         // By default assume they need 1 of an ingredient.
@@ -30,7 +28,7 @@ public class Ingredient {
         currentlyOwn = false;
     }
 
-    public int getId() {
+    public Integer getId() {
         return mId;
     }
 
@@ -59,15 +57,15 @@ public class Ingredient {
     }
 
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         mId = id;
     }
 
-    public int getDailyMenuId() {
+    public Integer getDailyMenuId() {
         return mDailyMenuId;
     }
 
-    public void setDailyMenuId(int dailyMenuId) {
+    public void setDailyMenuId(Integer dailyMenuId) {
         mDailyMenuId = dailyMenuId;
     }
 }

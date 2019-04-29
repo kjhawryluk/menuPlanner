@@ -17,18 +17,22 @@ public abstract class WeeklyMenuDao {
 
     public void insertWeeklyMenuAndDailyMenus(WeeklyMenu weeklyMenuAndDailyMenus) {
         long weeklyMenuId = insert(weeklyMenuAndDailyMenus);
+        weeklyMenuAndDailyMenus.setId((int) weeklyMenuId);
         List<DailyMenu> dailyMenus = weeklyMenuAndDailyMenus.getDailyMenus();
         // Make sure that daily menus have been created.
-        if(dailyMenus != null) {
+        if (dailyMenus != null) {
             for (int i = 0; i < dailyMenus.size(); i++) {
                 dailyMenus.get(i).setMenuId((int) weeklyMenuId);
             }
-            _insert(dailyMenus);
+            long[] ids = _insert(dailyMenus);
+            for (int i = 0; i < ids.length; i++) {
+                dailyMenus.get(i).setId(i);
+            }
         }
     }
 
     @Insert
-    abstract void _insert(List<DailyMenu> dailyMenus);
+    abstract long[] _insert(List<DailyMenu> dailyMenus);
 
     //CREATE
     @Insert

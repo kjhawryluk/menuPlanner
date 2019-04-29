@@ -1,19 +1,15 @@
 package edu.uchicago.kjhawryluk.prolistview.Models;
 
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import edu.uchicago.kjhawryluk.prolistview.TypeConverters.DateConverter;
-
-import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 //        foreignKeys = @ForeignKey(entity = WeeklyMenu.class,
 //        parentColumns = "mId",
@@ -23,8 +19,9 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 public class DailyMenu {
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    private int mId;
-    private int mMenuId;
+    private Integer mId;
+    @NonNull
+    private Integer mMenuId;
     private String mTitle;
     private String mUrl;
     @TypeConverters({DateConverter.class})
@@ -38,19 +35,19 @@ public class DailyMenu {
         mDate = date;
     }
 
-    public int getId() {
+    public Integer getId() {
         return mId;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         mId = id;
     }
 
-    public int getMenuId() {
+    public Integer getMenuId() {
         return mMenuId;
     }
 
-    public void setMenuId(int menuId) {
+    public void setMenuId(Integer menuId) {
         mMenuId = menuId;
     }
 

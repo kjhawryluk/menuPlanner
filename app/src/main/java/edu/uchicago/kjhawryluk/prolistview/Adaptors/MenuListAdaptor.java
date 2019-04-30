@@ -16,7 +16,7 @@ import java.util.List;
 import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
 import edu.uchicago.kjhawryluk.prolistview.R;
 import edu.uchicago.kjhawryluk.prolistview.WeeklyMenuFragment;
-import edu.uchicago.kjhawryluk.prolistview.WeeklyMenuListViewModel;
+import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuListViewModel;
 
 public class MenuListAdaptor extends RecyclerView.Adapter<MenuListAdaptor.WeeklyMenuViewHolder> {
 

@@ -6,7 +6,6 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +24,7 @@ import java.util.List;
 
 import edu.uchicago.kjhawryluk.prolistview.Adaptors.MenuListAdaptor;
 import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
+import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuListViewModel;
 
 public class MainActivity extends AppCompatActivity {
     private WeeklyMenuListViewModel mWeeklyMenuListViewModel;
@@ -51,15 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                createNewMenu();
-            }
-        });
     }
 
     private void createNewMenu() {
@@ -116,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.newMenuOption) {
+            createNewMenu();
             return true;
         }
 

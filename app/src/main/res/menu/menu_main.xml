@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="edu.uchicago.kjhawryluk.prolistview.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/newMenuOption"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/menu_add_new_menu"
         app:showAsAction="never" />
 </menu>

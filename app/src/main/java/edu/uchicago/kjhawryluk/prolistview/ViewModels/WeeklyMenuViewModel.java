@@ -1,4 +1,4 @@
-package edu.uchicago.kjhawryluk.prolistview;
+package edu.uchicago.kjhawryluk.prolistview.ViewModels;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
+import edu.uchicago.kjhawryluk.prolistview.MenuRepository;
 import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
 
 public class WeeklyMenuViewModel extends ViewModel implements ViewModelProvider.Factory {

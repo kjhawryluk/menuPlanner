@@ -4,6 +4,8 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.uchicago.kjhawryluk.prolistview.DAOs.DailyMenuDao;
@@ -26,7 +28,7 @@ public class MenuRepository {
     private LiveData<List<Ingredient>> mIngredients;
 
 
-    MenuRepository(Application application) {
+    public MenuRepository(Application application) {
         MenuDatabase db = MenuDatabase.getDatabase(application);
         mWeeklyMenuDao = db.weeklyMenuDao();
         mDailyMenuDao = db.dailyMenuDao();
@@ -47,7 +49,17 @@ public class MenuRepository {
         return mDailyMenus;
     }
 
-    public LiveData<List<DailyMenu>> getDailyMenusById(int id) {return mDailyMenuDao.getDailyMenusById(id);}
+    public LiveData<List<DailyMenu>> getDailyMenusById(int id) {
+        return mDailyMenuDao.getDailyMenusById(id);
+    }
+
+    public LiveData<DailyMenu> getDailyMenuById(int id) {
+        return mDailyMenuDao.getDailyMenuById(id);
+    }
+
+    public LiveData<List<Ingredient>> getAllDailyIngredientsById(int id) {
+        return mIngredientDao.getAllDailyIngredients(id);
+    }
 
     public void setDailyMenus(LiveData<List<DailyMenu>> dailyMenus) {
         mDailyMenus = dailyMenus;
@@ -62,11 +74,19 @@ public class MenuRepository {
         mIngredients = ingredients;
     }
 
-    public void delete(WeeklyMenu weeklyAndDailyMenu){
+    public void delete(WeeklyMenu weeklyAndDailyMenu) {
         new deleteWeeklyAndDailyMenusAsyncTask(mWeeklyMenuDao).execute(weeklyAndDailyMenu);
     }
 
-    public void insert (WeeklyMenu weeklyAndDailyMenu) {
+    public void delete(Ingredient ingredient) {
+        new deleteIngredientAsyncTask(mIngredientDao).execute(ingredient);
+    }
+
+    public void insert(Ingredient ingredient) {
+        new insertIngredientsAsyncTask(mIngredientDao).execute(ingredient);
+    }
+
+    public void insert(WeeklyMenu weeklyAndDailyMenu) {
         new insertWeeklyAndDailyMenusAsyncTask(mWeeklyMenuDao).execute(weeklyAndDailyMenu);
     }
 
@@ -96,6 +116,37 @@ public class MenuRepository {
         @Override
         protected Void doInBackground(final WeeklyMenu... params) {
             mAsyncTaskDao.delete(params[0]);
+            return null;
+        }
+    }
+
+    private static class deleteIngredientAsyncTask extends AsyncTask<Ingredient, Void, Void> {
+
+        private IngredientDao mAsyncTaskDao;
+
+        deleteIngredientAsyncTask(IngredientDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Ingredient... params) {
+            mAsyncTaskDao.delete(params[0]);
+            return null;
+        }
+    }
+
+    private static class insertIngredientsAsyncTask extends AsyncTask<Ingredient, Void, Void> {
+
+        private IngredientDao mAsyncTaskDao;
+
+        insertIngredientsAsyncTask(IngredientDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Ingredient... params) {
+            List<Ingredient> ingredientsToInsert = new ArrayList(Arrays.asList(params));
+            mAsyncTaskDao.insert(ingredientsToInsert);
             return null;
         }
     }

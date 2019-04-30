@@ -1,7 +1,6 @@
 package edu.uchicago.kjhawryluk.prolistview.Adaptors;
 
 import android.content.Context;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,7 @@ import java.util.List;
 
 import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
 import edu.uchicago.kjhawryluk.prolistview.R;
-import edu.uchicago.kjhawryluk.prolistview.WeeklyMenuViewModel;
+import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuViewModel;
 
 public class WeeklyMenuAdaptor extends RecyclerView.Adapter<WeeklyMenuAdaptor.WeeklyMenuViewHolder> {
 
@@ -54,9 +53,9 @@ public class WeeklyMenuAdaptor extends RecyclerView.Adapter<WeeklyMenuAdaptor.We
             SimpleDateFormat formatter = new SimpleDateFormat("E");
             String strDate = formatter.format(current.getDate());
             holder.mDayOfWeekTextView.setText(strDate);
-//            if(current.getTitle() != null){
-//                holder.mDailyMenuTitleTextView.setText(current.getTitle());
-//            }
+            if(current.getTitle() != null){
+                holder.mDailyMenuTitleTextView.setText(current.getTitle());
+            }
             holder.mDailyMenuItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

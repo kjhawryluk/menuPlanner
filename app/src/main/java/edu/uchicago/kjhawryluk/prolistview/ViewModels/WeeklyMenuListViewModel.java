@@ -20,7 +20,7 @@ public class WeeklyMenuListViewModel extends AndroidViewModel {
         mAllMenus = mRepository.getAllMenus();
     }
 
-    LiveData<List<WeeklyMenu>> getAllMenus() { return mAllMenus; }
+    public LiveData<List<WeeklyMenu>> getAllMenus() { return mAllMenus; }
 
     public void insert(WeeklyMenu menu) { mRepository.insert(menu); }
     public void delete(WeeklyMenu menu) { mRepository.delete(menu); }

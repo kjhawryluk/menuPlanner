@@ -1,6 +1,7 @@
 package edu.uchicago.kjhawryluk.prolistview.Adaptors;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +13,11 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import edu.uchicago.kjhawryluk.prolistview.DailyMenuFragment;
 import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
 import edu.uchicago.kjhawryluk.prolistview.R;
 import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuViewModel;
+import edu.uchicago.kjhawryluk.prolistview.WeeklyMenuFragment;
 
 public class WeeklyMenuAdaptor extends RecyclerView.Adapter<WeeklyMenuAdaptor.WeeklyMenuViewHolder> {
 
@@ -58,10 +61,8 @@ public class WeeklyMenuAdaptor extends RecyclerView.Adapter<WeeklyMenuAdaptor.We
             }
             holder.mDailyMenuItem.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    Toast toast = Toast.makeText(mInflater.getContext(),
-                            "Daily Menu:" + current.getId(), Toast.LENGTH_LONG);
-                    toast.show();
+                public void onClick(View view) {
+                    openDailyMenu(view, current.getId(), current.getDate().getTime());
                 }
             });
 
@@ -70,6 +71,17 @@ public class WeeklyMenuAdaptor extends RecyclerView.Adapter<WeeklyMenuAdaptor.We
             holder.mDailyMenuTitleTextView.setText("Daily Menus Are Missing!");
         }
     }
+
+    private void openDailyMenu(View view, int dailyMenuId, long dailyMenuDateTime) {
+        DailyMenuFragment dailyMenuFragment= DailyMenuFragment.newInstance(dailyMenuId, dailyMenuDateTime);
+        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+        activity.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.contentBody, dailyMenuFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
 
     public void setMenus(List<DailyMenu> menus){
         mMenus = menus;

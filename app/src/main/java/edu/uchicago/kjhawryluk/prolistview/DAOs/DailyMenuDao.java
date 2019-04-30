@@ -15,12 +15,12 @@ import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
 @Dao
 public abstract class DailyMenuDao {
 
-    public LiveData<DailyMenu> getDailyMenuWithIngredients(int id) {
-        LiveData<DailyMenu> dailyMenu = getDailyMenuById(id);
-        LiveData<List<Ingredient>> ingredients = getIngredientsById(id);
-        dailyMenu.getValue().setIngredients(ingredients.getValue());
-        return dailyMenu;
-    }
+//    public LiveData<DailyMenu> getDailyMenuWithIngredients(int id) {
+//        LiveData<DailyMenu> dailyMenu = getDailyMenuById(id);
+//        LiveData<List<Ingredient>> ingredients = getIngredientsById(id);
+//        dailyMenu.getValue().setIngredients(ingredients.getValue());
+//        return dailyMenu;
+//    }
 
     //CREATE
     @Insert
@@ -40,7 +40,7 @@ public abstract class DailyMenuDao {
 
     //Read
     @Query("SELECT * from daily_menu_table WHERE mId=:id ORDER BY mDate ASC LIMIT 1 ")
-    public abstract LiveData<DailyMenu> getDailyMenuById(int id);
+    public abstract DailyMenu getDailyMenuById(int id);
 
     //Read
     @Query("SELECT * from ingredient_table WHERE mDailyMenuId=:id ORDER BY mName ASC, mQuantity DESC")

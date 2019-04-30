@@ -17,7 +17,6 @@ public class DailyMenuViewModel extends ViewModel implements ViewModelProvider.F
     private MenuRepository mRepository;
     private int dailyMenuId;
     private LiveData<List<Ingredient>> mAllIngredients;
-    private LiveData<DailyMenu> mDailyMenu;
     @NonNull
     private final Application mApplication;
 
@@ -26,23 +25,15 @@ public class DailyMenuViewModel extends ViewModel implements ViewModelProvider.F
         mApplication = application;
         mRepository = new MenuRepository(application);
         mAllIngredients = mRepository.getAllDailyIngredientsById(menuId);
-        mDailyMenu = mRepository.getDailyMenuById(menuId);
     }
 
     public LiveData<List<Ingredient>> getAllIngredients() {
         return mAllIngredients;
     }
 
-    public LiveData<DailyMenu> getDailyMenu() {
-        return mDailyMenu;
-    }
-
-    public void setDailyMenu(LiveData<DailyMenu> dailyMenu) {
-        mDailyMenu = dailyMenu;
-    }
-
     public void delete(Ingredient ingredient) { mRepository.delete(ingredient); }
     public void insert(Ingredient ingredient) { mRepository.insert(ingredient); }
+    public void insert(Ingredient[] ingredient) { mRepository.insert(ingredient); }
 
 
     @NonNull

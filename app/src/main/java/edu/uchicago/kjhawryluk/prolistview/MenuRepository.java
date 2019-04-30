@@ -53,9 +53,9 @@ public class MenuRepository {
         return mDailyMenuDao.getDailyMenusById(id);
     }
 
-    public LiveData<DailyMenu> getDailyMenuById(int id) {
-        return mDailyMenuDao.getDailyMenuById(id);
-    }
+//    public DailyMenu getDailyMenuById(int id) {
+//        return mDailyMenuDao.getDailyMenuById(id);
+//    }
 
     public LiveData<List<Ingredient>> getAllDailyIngredientsById(int id) {
         return mIngredientDao.getAllDailyIngredients(id);
@@ -75,26 +75,33 @@ public class MenuRepository {
     }
 
     public void delete(WeeklyMenu weeklyAndDailyMenu) {
-        new deleteWeeklyAndDailyMenusAsyncTask(mWeeklyMenuDao).execute(weeklyAndDailyMenu);
+        new DeleteWeeklyAndDailyMenusAsyncTask(mWeeklyMenuDao).execute(weeklyAndDailyMenu);
     }
 
     public void delete(Ingredient ingredient) {
-        new deleteIngredientAsyncTask(mIngredientDao).execute(ingredient);
+        new DeleteIngredientAsyncTask(mIngredientDao).execute(ingredient);
     }
 
     public void insert(Ingredient ingredient) {
-        new insertIngredientsAsyncTask(mIngredientDao).execute(ingredient);
+        new InsertIngredientsAsyncTask(mIngredientDao).execute(ingredient);
+    }
+
+    public void insert(Ingredient[] ingredients) {
+        new InsertIngredientsAsyncTask(mIngredientDao).execute(ingredients);
     }
 
     public void insert(WeeklyMenu weeklyAndDailyMenu) {
-        new insertWeeklyAndDailyMenusAsyncTask(mWeeklyMenuDao).execute(weeklyAndDailyMenu);
+        new InsertWeeklyAndDailyMenusAsyncTask(mWeeklyMenuDao).execute(weeklyAndDailyMenu);
     }
 
-    private static class insertWeeklyAndDailyMenusAsyncTask extends AsyncTask<WeeklyMenu, Void, Void> {
+
+
+
+    private static class InsertWeeklyAndDailyMenusAsyncTask extends AsyncTask<WeeklyMenu, Void, Void> {
 
         private WeeklyMenuDao mAsyncTaskDao;
 
-        insertWeeklyAndDailyMenusAsyncTask(WeeklyMenuDao dao) {
+        InsertWeeklyAndDailyMenusAsyncTask(WeeklyMenuDao dao) {
             mAsyncTaskDao = dao;
         }
 
@@ -105,11 +112,11 @@ public class MenuRepository {
         }
     }
 
-    private static class deleteWeeklyAndDailyMenusAsyncTask extends AsyncTask<WeeklyMenu, Void, Void> {
+    private static class DeleteWeeklyAndDailyMenusAsyncTask extends AsyncTask<WeeklyMenu, Void, Void> {
 
         private WeeklyMenuDao mAsyncTaskDao;
 
-        deleteWeeklyAndDailyMenusAsyncTask(WeeklyMenuDao dao) {
+        DeleteWeeklyAndDailyMenusAsyncTask(WeeklyMenuDao dao) {
             mAsyncTaskDao = dao;
         }
 
@@ -120,11 +127,11 @@ public class MenuRepository {
         }
     }
 
-    private static class deleteIngredientAsyncTask extends AsyncTask<Ingredient, Void, Void> {
+    private static class DeleteIngredientAsyncTask extends AsyncTask<Ingredient, Void, Void> {
 
         private IngredientDao mAsyncTaskDao;
 
-        deleteIngredientAsyncTask(IngredientDao dao) {
+        DeleteIngredientAsyncTask(IngredientDao dao) {
             mAsyncTaskDao = dao;
         }
 
@@ -135,11 +142,11 @@ public class MenuRepository {
         }
     }
 
-    private static class insertIngredientsAsyncTask extends AsyncTask<Ingredient, Void, Void> {
+    private static class InsertIngredientsAsyncTask extends AsyncTask<Ingredient, Void, Void> {
 
         private IngredientDao mAsyncTaskDao;
 
-        insertIngredientsAsyncTask(IngredientDao dao) {
+        InsertIngredientsAsyncTask(IngredientDao dao) {
             mAsyncTaskDao = dao;
         }
 
@@ -148,6 +155,20 @@ public class MenuRepository {
             List<Ingredient> ingredientsToInsert = new ArrayList(Arrays.asList(params));
             mAsyncTaskDao.insert(ingredientsToInsert);
             return null;
+        }
+    }
+
+    private static class GetDailyMenuAsyncTask extends AsyncTask<Integer, Void, DailyMenu> {
+
+        private DailyMenuDao mAsyncTaskDao;
+
+        GetDailyMenuAsyncTask(DailyMenuDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected DailyMenu doInBackground(Integer... integers) {
+            return mAsyncTaskDao.getDailyMenuById(integers[0]);
         }
     }
 }

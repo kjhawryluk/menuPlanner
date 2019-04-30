@@ -64,7 +64,7 @@ public class MenuListAdaptor extends RecyclerView.Adapter<MenuListAdaptor.Weekly
             holder.mWeeklyMenuItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    openDailyMenu(view, current.getId(), current.getStartDate().getTime());
+                    openWeeklyMenu(view, current.getId(), current.getStartDate().getTime());
                 }
             });
         } else {
@@ -73,7 +73,7 @@ public class MenuListAdaptor extends RecyclerView.Adapter<MenuListAdaptor.Weekly
         }
     }
 
-    private void openDailyMenu(View view, int menuId, long date) {
+    private void openWeeklyMenu(View view, int menuId, long date) {
         WeeklyMenuFragment weeklyMenuFragment= WeeklyMenuFragment.newInstance(menuId, date);
         AppCompatActivity activity = (AppCompatActivity) view.getContext();
         activity.getSupportFragmentManager()

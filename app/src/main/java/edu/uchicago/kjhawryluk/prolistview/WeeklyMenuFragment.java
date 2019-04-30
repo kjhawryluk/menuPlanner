@@ -104,8 +104,7 @@ public class WeeklyMenuFragment extends Fragment {
             }
         });
 
-
-        return inflater.inflate(R.layout.weekly_menu_fragment, container, false);
+        return root;
     }
 
 

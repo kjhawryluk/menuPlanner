@@ -35,7 +35,7 @@ public abstract class DailyMenuDao {
     public abstract LiveData<List<DailyMenu>> getAllDailyMenusByMenuId(int menuId);
 
     //Read
-    @Query("SELECT * from daily_menu_table WHERE mId=:id ORDER BY mDate ASC")
+    @Query("SELECT * from daily_menu_table WHERE mMenuId=:id ORDER BY mDate ASC")
     public abstract LiveData<List<DailyMenu>> getDailyMenusById(int id);
 
     //Read

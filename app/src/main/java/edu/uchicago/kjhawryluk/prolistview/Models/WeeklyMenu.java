@@ -5,6 +5,7 @@ import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.List;
 import edu.uchicago.kjhawryluk.prolistview.TypeConverters.DateConverter;
 
 @Entity(tableName = "weekly_menu_table")
-public class WeeklyMenu {
+public class WeeklyMenu implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull

@@ -3,7 +3,6 @@ package edu.uchicago.kjhawryluk.prolistview;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class MenuRepository {
 
     // This should only every be one. I need to check if I can change this from a list
     // to a single object
-    private LiveData<List<DailyMenu>> mDailyMenu;
+    private LiveData<List<DailyMenu>> mDailyMenus;
     private LiveData<List<Ingredient>> mIngredients;
 
 
@@ -44,12 +43,14 @@ public class MenuRepository {
     }
 
 
-    public LiveData<List<DailyMenu>> getDailyMenu() {
-        return mDailyMenu;
+    public LiveData<List<DailyMenu>> getDailyMenus() {
+        return mDailyMenus;
     }
 
-    public void setDailyMenu(LiveData<List<DailyMenu>> dailyMenu) {
-        mDailyMenu = dailyMenu;
+    public LiveData<List<DailyMenu>> getDailyMenusById(int id) {return mDailyMenuDao.getDailyMenusById(id);}
+
+    public void setDailyMenus(LiveData<List<DailyMenu>> dailyMenus) {
+        mDailyMenus = dailyMenus;
     }
 
 

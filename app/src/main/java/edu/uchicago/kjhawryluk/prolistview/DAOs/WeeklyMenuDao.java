@@ -48,7 +48,7 @@ public abstract class WeeklyMenuDao {
 
     //Read
     @Query("SELECT * from weekly_menu_table WHERE mId=:menuId ORDER BY mStartDate desc")
-    public abstract LiveData<List<WeeklyMenu>> getWeeklyMenuById(int menuId);
+    public abstract LiveData<WeeklyMenu> getWeeklyMenuById(int menuId);
 
     //Delete
     @Delete

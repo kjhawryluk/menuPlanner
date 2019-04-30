@@ -11,7 +11,7 @@ import java.util.List;
 
 import edu.uchicago.kjhawryluk.prolistview.TypeConverters.DateConverter;
 
-//        foreignKeys = @ForeignKey(entity = WeeklyMenu.class,
+//        foreignKeys = @ForeignKey(entity = WeeklyMenuFragment.class,
 //        parentColumns = "mId",
 //        childColumns = "mMenuId",
 //        onDelete = CASCADE))

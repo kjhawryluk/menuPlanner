@@ -53,7 +53,7 @@ public class DailyMenuAdaptor extends RecyclerView.Adapter<DailyMenuAdaptor.Dail
         if (mIngredients != null) {
             final Ingredient current = mIngredients.get(position);
             holder.mDailyMenuIngredientNameEditText.setText(current.getName());
-            holder.mDailyMenuIngredientQuantityEditText.setText(current.getQuantity());
+            holder.mDailyMenuIngredientQuantityEditText.setText(String.valueOf(current.getQuantity()));
 
             // Update the ingredient name when it changes.
             holder.mDailyMenuIngredientNameEditText.setOnFocusChangeListener(new IngredientFocusListener(current));

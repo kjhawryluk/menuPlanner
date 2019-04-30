@@ -87,13 +87,13 @@ public class DailyMenuFragment extends Fragment {
         String menuDateStr = formatter.format(mDailyMenuDate);
         mDailyMenuDateValueTextView.setText(menuDateStr);
 
-        mIngredientsToAddEditText.setOnFocusChangeListener(
-                new View.OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View v, boolean hasFocus) {
-                        enableAddIngredientsButton(hasFocus);
-                    }
-                });
+//        mIngredientsToAddEditText.setOnFocusChangeListener(
+//                new View.OnFocusChangeListener() {
+//                    @Override
+//                    public void onFocusChange(View v, boolean hasFocus) {
+//                        enableAddIngredientsButton(hasFocus);
+//                    }
+//                });
 
                 mAddIngredientsButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -105,9 +105,7 @@ public class DailyMenuFragment extends Fragment {
         mSeeWeeklyMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(container.getContext(),
-                        "Opening Shopping List", Toast.LENGTH_LONG);
-                toast.show();
+                getFragmentManager().popBackStack();
             }
         });
 
@@ -133,7 +131,7 @@ public class DailyMenuFragment extends Fragment {
         String ingredientList = mIngredientsToAddEditText.getText().toString();
         String[] ingredientStrings = ingredientList.split(",");
         Ingredient[] ingredients = new Ingredient[ingredientStrings.length];
-        for (int i = 0; i < ingredientList.length(); i++) {
+        for (int i = 0; i < ingredients.length; i++) {
             String ingredientName = ingredientStrings[i];
             ingredients[i] = new Ingredient(mMenuId, ingredientName);
         }

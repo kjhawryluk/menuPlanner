@@ -87,7 +87,9 @@ public class MenuRepository {
     }
 
     public void insert(Ingredient[] ingredients) {
-        new InsertIngredientsAsyncTask(mIngredientDao).execute(ingredients);
+        for (Ingredient ingredient : ingredients) {
+            new InsertIngredientsAsyncTask(mIngredientDao).execute(ingredient);
+        }
     }
 
     public void insert(WeeklyMenu weeklyAndDailyMenu) {
@@ -152,8 +154,8 @@ public class MenuRepository {
 
         @Override
         protected Void doInBackground(final Ingredient... params) {
-            List<Ingredient> ingredientsToInsert = new ArrayList(Arrays.asList(params));
-            mAsyncTaskDao.insert(ingredientsToInsert);
+//            List<Ingredient> ingredientsToInsert = new ArrayList(Arrays.asList(params));
+            mAsyncTaskDao.insert(params[0]);
             return null;
         }
     }

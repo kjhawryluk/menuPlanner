@@ -54,9 +54,9 @@ public class WeeklyMenuAdaptor extends RecyclerView.Adapter<WeeklyMenuAdaptor.We
             SimpleDateFormat formatter = new SimpleDateFormat("E");
             String strDate = formatter.format(current.getDate());
             holder.mDayOfWeekTextView.setText(strDate);
-            if(current.getTitle() != null){
-                holder.mDailyMenuTitleTextView.setText(current.getTitle());
-            }
+//            if(current.getTitle() != null){
+//                holder.mDailyMenuTitleTextView.setText(current.getTitle());
+//            }
             holder.mDailyMenuItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

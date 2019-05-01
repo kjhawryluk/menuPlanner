@@ -53,10 +53,6 @@ public class MenuRepository {
         return mDailyMenuDao.getDailyMenusById(id);
     }
 
-//    public DailyMenu getDailyMenuById(int id) {
-//        return mDailyMenuDao.getDailyMenuById(id);
-//    }
-
     public LiveData<List<Ingredient>> getAllDailyIngredientsById(int id) {
         return mIngredientDao.getAllDailyIngredients(id);
     }

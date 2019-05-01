@@ -3,6 +3,7 @@ package edu.uchicago.kjhawryluk.prolistview.Adaptors;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import java.util.List;
 import edu.uchicago.kjhawryluk.prolistview.DailyMenuFragment;
 import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
 import edu.uchicago.kjhawryluk.prolistview.R;
-import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuViewModel;
+import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuListViewModel;
 import edu.uchicago.kjhawryluk.prolistview.WeeklyMenuFragment;
 
 public class WeeklyMenuAdaptor extends RecyclerView.Adapter<WeeklyMenuAdaptor.WeeklyMenuViewHolder> {
@@ -35,9 +36,9 @@ public class WeeklyMenuAdaptor extends RecyclerView.Adapter<WeeklyMenuAdaptor.We
 
     private final LayoutInflater mInflater;
     private List<DailyMenu> mMenus; // Cached copy of menus
-    private WeeklyMenuViewModel mWeeklyMenuListViewModel;
+    private WeeklyMenuListViewModel mWeeklyMenuListViewModel;
 
-    public WeeklyMenuAdaptor(Context context, WeeklyMenuViewModel weeklyMenuListViewModel)
+    public WeeklyMenuAdaptor(Context context, WeeklyMenuListViewModel weeklyMenuListViewModel)
     {
         mInflater = LayoutInflater.from(context);
         mWeeklyMenuListViewModel = weeklyMenuListViewModel;
@@ -56,6 +57,7 @@ public class WeeklyMenuAdaptor extends RecyclerView.Adapter<WeeklyMenuAdaptor.We
             SimpleDateFormat formatter = new SimpleDateFormat("E");
             String strDate = formatter.format(current.getDate());
             holder.mDayOfWeekTextView.setText(strDate);
+
             if(current.getTitle() != null){
                 holder.mDailyMenuTitleTextView.setText(current.getTitle());
             }

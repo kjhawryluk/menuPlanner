@@ -22,13 +22,13 @@ import java.util.List;
 import edu.uchicago.kjhawryluk.prolistview.Adaptors.WeeklyMenuAdaptor;
 import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
 import edu.uchicago.kjhawryluk.prolistview.TypeConverters.DateConverter;
-import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuViewModel;
+import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuListViewModel;
 
 public class WeeklyMenuFragment extends Fragment {
 
     public static final String MENU_ID = "MENU_ID";
     public static final String MENU_DATE = "MENU_DATE";
-    private WeeklyMenuViewModel mViewModel;
+    private WeeklyMenuListViewModel mViewModel;
     private Date mMenuDate;
     private int mMenuId;
     private Button shoppingListButton;
@@ -66,10 +66,11 @@ public class WeeklyMenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.weekly_menu_fragment, container, false);
+        mViewModel = ViewModelProviders.of(this).get(WeeklyMenuListViewModel.class);
 
-        mViewModel = ViewModelProviders.of(this,
-                new WeeklyMenuViewModel(getActivity().getApplication(), mMenuId))
-                .get(WeeklyMenuViewModel.class);
+//        mViewModel = ViewModelProviders.of(this,
+//                new WeeklyMenuViewModel(getActivity().getApplication(), mMenuId))
+//                .get(WeeklyMenuViewModel.class);
 
         shoppingListButton = root.findViewById(R.id.seeShoppingListButton);
         menuDateValueTextView = root.findViewById(R.id.menuDateValueTextView);
@@ -93,14 +94,15 @@ public class WeeklyMenuFragment extends Fragment {
         final WeeklyMenuAdaptor adapter = new WeeklyMenuAdaptor(container.getContext(), mViewModel);
         dailyMenuList.setAdapter(adapter);
         dailyMenuList.setLayoutManager(new LinearLayoutManager(container.getContext()));
-
-        mViewModel.getDailyMenus().observe(this, new Observer<List<DailyMenu>>() {
+        mViewModel.getDailyMenus().observe(WeeklyMenuFragment.this, new Observer<List<DailyMenu>>() {
             @Override
             public void onChanged(@Nullable final List<DailyMenu> menus) {
                 // Update the cached copy of the words in the adapter.
                 adapter.setMenus(menus);
             }
         });
+
+        mViewModel.setWeeklyMenuId(mMenuId);
 
         return root;
     }

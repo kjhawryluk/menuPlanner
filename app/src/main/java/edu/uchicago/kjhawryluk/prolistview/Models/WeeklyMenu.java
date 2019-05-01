@@ -1,4 +1,5 @@
 package edu.uchicago.kjhawryluk.prolistview.Models;
+
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
@@ -40,7 +41,9 @@ public class WeeklyMenu implements Serializable {
     public void setStartDate(Date startDate) {
         mStartDate = startDate;
     }
-    public WeeklyMenu() {}
+
+    public WeeklyMenu() {
+    }
 
     public WeeklyMenu(Date startDate) {
         mStartDate = startDate;
@@ -56,7 +59,7 @@ public class WeeklyMenu implements Serializable {
     }
 
     private void generateDailyMenus() {
-        if(mDailyMenus == null){
+        if (mDailyMenus == null) {
             mDailyMenus = new ArrayList<>();
         }
 

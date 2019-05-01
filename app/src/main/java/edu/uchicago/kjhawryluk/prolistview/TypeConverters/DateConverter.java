@@ -1,6 +1,7 @@
 package edu.uchicago.kjhawryluk.prolistview.TypeConverters;
 
 import android.arch.persistence.room.TypeConverter;
+
 import java.util.Date;
 
 /**

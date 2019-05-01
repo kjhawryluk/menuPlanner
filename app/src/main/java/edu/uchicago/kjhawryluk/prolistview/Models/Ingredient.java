@@ -41,7 +41,7 @@ public class Ingredient {
     }
 
     public int getQuantity() {
-        return mQuantity ;
+        return mQuantity;
     }
 
     public void setQuantity(int quantity) {

@@ -34,7 +34,7 @@ public abstract class DailyMenuDao {
 
     //Read
     @Query("SELECT * from ingredient_table WHERE mDailyMenuId=:id ORDER BY mName ASC, mQuantity DESC")
-    public abstract LiveData<List<Ingredient>>  getIngredientsById(int id);
+    public abstract LiveData<List<Ingredient>> getIngredientsById(int id);
 
     //Delete
     @Delete

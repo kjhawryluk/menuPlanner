@@ -25,7 +25,8 @@ public class DailyMenu {
     @Ignore
     private List<Ingredient> mIngredients;
 
-    public DailyMenu() {}
+    public DailyMenu() {
+    }
 
     public DailyMenu(Date date) {
         mDate = date;

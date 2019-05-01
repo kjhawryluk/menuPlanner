@@ -94,9 +94,11 @@ public class WeeklyMenuListViewModel extends AndroidViewModel {
     public void insert(WeeklyMenu menu) {
         mRepository.insert(menu);
     }
+
     public void insert(DailyMenu menu) {
         mRepository.insert(menu);
     }
+
     public void delete(WeeklyMenu menu) {
         mRepository.delete(menu);
     }

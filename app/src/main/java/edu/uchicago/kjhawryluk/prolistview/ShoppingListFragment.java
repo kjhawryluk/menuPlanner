@@ -36,7 +36,8 @@ public class ShoppingListFragment extends Fragment {
     private Button mSeeWeeklyMenuButton;
     private RecyclerView mShoppingListIngredients;
 
-    public ShoppingListFragment() {}
+    public ShoppingListFragment() {
+    }
 
     public static ShoppingListFragment newInstance(int menuId) {
         ShoppingListFragment weeklyMenuFragment = new ShoppingListFragment();

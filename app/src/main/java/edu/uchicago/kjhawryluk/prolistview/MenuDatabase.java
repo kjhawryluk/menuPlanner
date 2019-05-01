@@ -27,7 +27,9 @@ import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
         Ingredient.class}, version = 1)
 public abstract class MenuDatabase extends RoomDatabase {
     public abstract WeeklyMenuDao weeklyMenuDao();
+
     public abstract DailyMenuDao dailyMenuDao();
+
     public abstract IngredientDao ingredientDao();
 
     private static volatile MenuDatabase INSTANCE;
@@ -40,7 +42,7 @@ public abstract class MenuDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             MenuDatabase.class, "menu_database")
                             .fallbackToDestructiveMigration()
-                           // .addCallback(sMenuDatabaseCallback)
+                            // .addCallback(sMenuDatabaseCallback)
                             .build();
                 }
             }
@@ -49,10 +51,10 @@ public abstract class MenuDatabase extends RoomDatabase {
     }
 
     private static MenuDatabase.Callback sMenuDatabaseCallback =
-            new RoomDatabase.Callback(){
+            new RoomDatabase.Callback() {
 
                 @Override
-                public void onOpen (@NonNull SupportSQLiteDatabase db){
+                public void onOpen(@NonNull SupportSQLiteDatabase db) {
                     super.onOpen(db);
                     new PopulateDbAsync(INSTANCE).execute();
                 }
@@ -74,16 +76,16 @@ public abstract class MenuDatabase extends RoomDatabase {
         protected Void doInBackground(final Void... params) {
             //  mDao.deleteAll();
             Calendar cal = Calendar.getInstance();
-            cal.set(2019,1,1);
+            cal.set(2019, 1, 1);
             Date startDate = cal.getTime();
             WeeklyMenu weeklyMenu = new WeeklyMenu(startDate);
             mWeeklyMenuDao.insertWeeklyMenuAndDailyMenus(weeklyMenu);
             final DailyMenu dayOne = weeklyMenu.getDailyMenus().get(0);
 
-            List<Ingredient> ingredients = new ArrayList<Ingredient>(){
+            List<Ingredient> ingredients = new ArrayList<Ingredient>() {
                 {
-                    add(new Ingredient(dayOne.getId(),"pizza"));
-                    add(new Ingredient(dayOne.getId(),"chips"));
+                    add(new Ingredient(dayOne.getId(), "pizza"));
+                    add(new Ingredient(dayOne.getId(), "chips"));
                 }
             };
             mIngredientDao.insert(ingredients);

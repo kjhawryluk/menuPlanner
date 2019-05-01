@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +25,7 @@ public class MenuListAdaptor extends RecyclerView.Adapter<MenuListAdaptor.Weekly
         private final TextView mMenuDate;
         private final ImageButton mDeleteButton;
         private final LinearLayout mWeeklyMenuItem;
+
         private WeeklyMenuViewHolder(View itemView) {
             super(itemView);
             mMenuDate = itemView.findViewById(R.id.menuDate);
@@ -37,8 +38,7 @@ public class MenuListAdaptor extends RecyclerView.Adapter<MenuListAdaptor.Weekly
     private List<WeeklyMenu> mMenus; // Cached copy of menus
     private WeeklyMenuListViewModel mWeeklyMenuListViewModel;
 
-    public MenuListAdaptor(Context context, WeeklyMenuListViewModel weeklyMenuListViewModel)
-    {
+    public MenuListAdaptor(Context context, WeeklyMenuListViewModel weeklyMenuListViewModel) {
         mInflater = LayoutInflater.from(context);
         mWeeklyMenuListViewModel = weeklyMenuListViewModel;
     }
@@ -75,7 +75,7 @@ public class MenuListAdaptor extends RecyclerView.Adapter<MenuListAdaptor.Weekly
     }
 
     public static void openWeeklyMenu(View view, int menuId, long date) {
-        WeeklyMenuFragment weeklyMenuFragment= WeeklyMenuFragment.newInstance(menuId, date);
+        WeeklyMenuFragment weeklyMenuFragment = WeeklyMenuFragment.newInstance(menuId, date);
         AppCompatActivity activity = (AppCompatActivity) view.getContext();
         activity.getSupportFragmentManager()
                 .beginTransaction()
@@ -84,7 +84,7 @@ public class MenuListAdaptor extends RecyclerView.Adapter<MenuListAdaptor.Weekly
                 .commit();
     }
 
-    public void setMenus(List<WeeklyMenu> menus){
+    public void setMenus(List<WeeklyMenu> menus) {
         mMenus = menus;
         notifyDataSetChanged();
     }

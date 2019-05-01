@@ -168,7 +168,7 @@ public class MenuRepository {
 
         @Override
         protected Void doInBackground(final Ingredient... params) {
-            params[0].setId((int)mAsyncTaskDao.insert(params[0]));
+            params[0].setId((int) mAsyncTaskDao.insert(params[0]));
             return null;
         }
     }

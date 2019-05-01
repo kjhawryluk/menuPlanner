@@ -78,7 +78,7 @@ public class ShoppingListAdaptor extends RecyclerView.Adapter<ShoppingListAdapto
                 }
             });
 
-        } else{
+        } else {
             holder.mShoppingListIngredientNameTextView.setText("No Ingredients");
         }
     }

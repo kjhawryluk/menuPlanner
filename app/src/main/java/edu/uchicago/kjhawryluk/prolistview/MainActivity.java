@@ -29,7 +29,6 @@ import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuListViewModel;
 
 public class MainActivity extends AppCompatActivity {
     private WeeklyMenuListViewModel mWeeklyMenuListViewModel;
-    public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.fragment_create_new_menu);
-        final CalendarView startDateCalendarView =  dialog.findViewById(R.id.startDateCalendarView);
+        final CalendarView startDateCalendarView = dialog.findViewById(R.id.startDateCalendarView);
 
         //Update date when a new one is selected.
-        startDateCalendarView.setOnDateChangeListener( new CalendarView.OnDateChangeListener() {
+        startDateCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                Calendar selectedDate = new GregorianCalendar( year, month, dayOfMonth );
+                Calendar selectedDate = new GregorianCalendar(year, month, dayOfMonth);
                 startDateCalendarView.setDate(selectedDate.getTimeInMillis());
             }
         });
@@ -76,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 WeeklyMenu weeklyMenu = new WeeklyMenu(new Date(startDateCalendarView.getDate()));
                 mWeeklyMenuListViewModel.insert(weeklyMenu);
                 Toast toast = Toast.makeText(getApplicationContext(),
-                        "New menu created",Toast.LENGTH_SHORT);
+                        "New menu created", Toast.LENGTH_SHORT);
                 toast.show();
                 dialog.dismiss();
             }
@@ -92,8 +91,6 @@ public class MainActivity extends AppCompatActivity {
         });
         dialog.show();
     }
-
-
 
 
     @Override

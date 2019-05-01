@@ -9,7 +9,7 @@
     <color name="colorFont">#29B6F6</color>
     <color name="colorAccentSecondary">#FF5722</color>
     <color name="colorTextEdit">#FFFFFF</color>
-    <color name="hint">#BDBDBD</color>
+    <color name="hint">#888787</color>
 
 
 </resources>

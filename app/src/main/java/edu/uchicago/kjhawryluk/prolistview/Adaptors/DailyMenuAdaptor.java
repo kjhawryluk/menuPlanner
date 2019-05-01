@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,12 +24,14 @@ public class DailyMenuAdaptor extends RecyclerView.Adapter<DailyMenuAdaptor.Dail
     class DailyMenuViewHolder extends RecyclerView.ViewHolder {
         private final EditText mDailyMenuIngredientNameEditText;
         private final EditText mDailyMenuIngredientQuantityEditText;
+        private final CheckBox mCurrentOwnCheckBox;
         private final Button mRemoveDailyIngredient;
 
         private DailyMenuViewHolder(View itemView) {
             super(itemView);
             mDailyMenuIngredientNameEditText = itemView.findViewById(R.id.dailyMenuIngredientNameEditText);
             mDailyMenuIngredientQuantityEditText = itemView.findViewById(R.id.dailyMenuIngredientQuantityEditText);
+            mCurrentOwnCheckBox = itemView.findViewById(R.id.currentOwnCheckBox);
             mRemoveDailyIngredient = itemView.findViewById(R.id.removeDailyIngredient);
         }
     }
@@ -53,14 +57,14 @@ public class DailyMenuAdaptor extends RecyclerView.Adapter<DailyMenuAdaptor.Dail
             final Ingredient current = mIngredients.get(position);
             holder.mDailyMenuIngredientNameEditText.setText(current.getName());
             holder.mDailyMenuIngredientQuantityEditText.setText(String.valueOf(current.getQuantity()));
-
+            holder.mCurrentOwnCheckBox.setChecked(current.isCurrentlyOwn());
             // Update the ingredient name when it changes.
-            holder.mDailyMenuIngredientNameEditText.setOnFocusChangeListener(new IngredientFocusListener(current, holder));
-            holder.mDailyMenuIngredientQuantityEditText.setOnFocusChangeListener(new IngredientFocusListener(current, holder));
+            holder.mDailyMenuIngredientNameEditText.setOnFocusChangeListener(new IngredientChangeListener(current, holder));
+            holder.mDailyMenuIngredientQuantityEditText.setOnFocusChangeListener(new IngredientChangeListener(current, holder));
 
             holder.mDailyMenuIngredientNameEditText.setOnKeyListener(new EditTextEnterListener(holder.mDailyMenuIngredientNameEditText));
             holder.mDailyMenuIngredientQuantityEditText.setOnKeyListener(new EditTextEnterListener(holder.mDailyMenuIngredientQuantityEditText));
-
+            holder.mCurrentOwnCheckBox.setOnCheckedChangeListener(new IngredientChangeListener(current, holder));
 
             //Delete it if the button is clicked.
             holder.mRemoveDailyIngredient.setOnClickListener(new View.OnClickListener() {
@@ -72,11 +76,11 @@ public class DailyMenuAdaptor extends RecyclerView.Adapter<DailyMenuAdaptor.Dail
         }
     }
 
-    private class IngredientFocusListener implements OnFocusChangeListener {
+    private class IngredientChangeListener implements OnFocusChangeListener, CheckBox.OnCheckedChangeListener {
         Ingredient selectedIngredient;
         DailyMenuViewHolder holder;
 
-        public IngredientFocusListener(Ingredient selectedIngredient, DailyMenuViewHolder holder) {
+        public IngredientChangeListener(Ingredient selectedIngredient, DailyMenuViewHolder holder) {
             this.selectedIngredient = selectedIngredient;
             this.holder = holder;
         }
@@ -84,11 +88,23 @@ public class DailyMenuAdaptor extends RecyclerView.Adapter<DailyMenuAdaptor.Dail
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
             if (!hasFocus) {
-                selectedIngredient.setQuantity(getValidQuantity());
-                selectedIngredient.setName(holder.mDailyMenuIngredientNameEditText.getText().toString());
-                mDailyMenuViewModel.insert(selectedIngredient);
+                saveIngredientChanges();
             }
         }
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            saveIngredientChanges();
+        }
+
+        private void saveIngredientChanges() {
+            selectedIngredient.setQuantity(getValidQuantity());
+            selectedIngredient.setName(holder.mDailyMenuIngredientNameEditText.getText().toString());
+            selectedIngredient.setCurrentlyOwn(holder.mCurrentOwnCheckBox.isChecked());
+            mDailyMenuViewModel.insert(selectedIngredient);
+        }
+
+
 
         /**
          * Parses the quantity. If it's not a number, it will change it to 1 and notify the user.
@@ -107,6 +123,8 @@ public class DailyMenuAdaptor extends RecyclerView.Adapter<DailyMenuAdaptor.Dail
             }
            return quantityValue;
         }
+
+
     }
 
 

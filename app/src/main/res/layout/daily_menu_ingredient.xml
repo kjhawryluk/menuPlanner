@@ -3,16 +3,28 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <EditText
         android:id="@+id/dailyMenuIngredientQuantityEditText"
         android:layout_width="50dp"
         android:paddingRight="10dp"
+        android:gravity="center"
         android:textSize="@dimen/listFontSize"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorAccentSecondary"
         android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/currentOwnCheckBox"
+        android:layout_width="35dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/hint"
+        />
 
     <EditText
         android:id="@+id/dailyMenuIngredientNameEditText"
@@ -20,6 +32,7 @@
         android:textColor="@color/colorTextEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         />
 
     <Button

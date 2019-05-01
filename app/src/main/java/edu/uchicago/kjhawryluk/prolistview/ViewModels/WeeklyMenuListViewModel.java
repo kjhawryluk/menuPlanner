@@ -31,12 +31,21 @@ public class WeeklyMenuListViewModel extends AndroidViewModel {
         mAllDailyMenus = Transformations.switchMap(filterLiveDataByWeeklyMenuId,
                 weeklyMenuId -> mRepository.getDailyMenusById(weeklyMenuId));
         mDailyMenuIngredients = Transformations.switchMap(filterLiveDataByDailyMenuId,
-           dailyMenuId ->   mRepository.getAllDailyIngredientsById(dailyMenuId));
+                dailyMenuId -> mRepository.getAllDailyIngredientsById(dailyMenuId));
     }
 
-    public void delete(Ingredient ingredient) { mRepository.delete(ingredient);}
-    public void insert(Ingredient ingredient) { mRepository.insert(ingredient); }
-    public void insert(Ingredient[] ingredient) { mRepository.insert(ingredient); }
+    public void delete(Ingredient ingredient) {
+        mRepository.delete(ingredient);
+    }
+
+    public void insert(Ingredient ingredient) {
+        mRepository.insert(ingredient);
+    }
+
+    public void insert(Ingredient[] ingredient) {
+        mRepository.insert(ingredient);
+    }
+
     public LiveData<List<Ingredient>> getDailyMenuIngredients() {
         return mDailyMenuIngredients;
     }

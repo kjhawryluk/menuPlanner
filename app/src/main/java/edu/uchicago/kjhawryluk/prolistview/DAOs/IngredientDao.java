@@ -28,6 +28,14 @@ public interface IngredientDao {
     @Query("SELECT * from ingredient_table WHERE mDailyMenuId=:dailyMenuId ORDER BY mName ASC")
     LiveData<List<Ingredient>> getAllDailyIngredients(int dailyMenuId);
 
+    //Read
+    @Query("SELECT ingredient_table.mId, ingredient_table.mDailyMenuId,ingredient_table.mName, " +
+            "ingredient_table.mQuantity " +
+            "FROM ingredient_table JOIN daily_menu_table ON mDailyMenuId = daily_menu_table.mId " +
+            "WHERE daily_menu_table.mMenuId=:menuId and currentlyOwn = 0 " +
+            "ORDER BY mName ASC, mQuantity DESC")
+    LiveData<List<Ingredient>> getShoppingListIngredients(int menuId);
+
     //Delete
     @Delete
     void delete(Ingredient ingredient);

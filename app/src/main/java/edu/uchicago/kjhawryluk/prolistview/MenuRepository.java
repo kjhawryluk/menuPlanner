@@ -57,6 +57,10 @@ public class MenuRepository {
         return mIngredientDao.getAllDailyIngredients(id);
     }
 
+    public LiveData<List<Ingredient>> getShoppingListIngredients(int menuId) {
+        return mIngredientDao.getShoppingListIngredients(menuId);
+    }
+
     public void setDailyMenus(LiveData<List<DailyMenu>> dailyMenus) {
         mDailyMenus = dailyMenus;
     }

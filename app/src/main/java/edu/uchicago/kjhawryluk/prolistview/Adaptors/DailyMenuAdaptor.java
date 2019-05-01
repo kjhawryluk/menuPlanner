@@ -56,8 +56,8 @@ public class DailyMenuAdaptor extends RecyclerView.Adapter<DailyMenuAdaptor.Dail
             holder.mDailyMenuIngredientQuantityEditText.setText(String.valueOf(current.getQuantity()));
 
             // Update the ingredient name when it changes.
-            holder.mDailyMenuIngredientNameEditText.setOnFocusChangeListener(new IngredientFocusListener(current));
-            holder.mDailyMenuIngredientQuantityEditText.setOnFocusChangeListener(new IngredientFocusListener(current));
+            holder.mDailyMenuIngredientNameEditText.setOnFocusChangeListener(new IngredientFocusListener(current, holder));
+            holder.mDailyMenuIngredientQuantityEditText.setOnFocusChangeListener(new IngredientFocusListener(current, holder));
 
             //Delete it if the button is clicked.
             holder.mRemoveDailyIngredient.setOnClickListener(new View.OnClickListener() {
@@ -71,18 +71,44 @@ public class DailyMenuAdaptor extends RecyclerView.Adapter<DailyMenuAdaptor.Dail
 
     private class IngredientFocusListener implements OnFocusChangeListener {
         Ingredient selectedIngredient;
+        DailyMenuViewHolder holder;
 
-        public IngredientFocusListener(Ingredient selectedIngredient) {
+        public IngredientFocusListener(Ingredient selectedIngredient, DailyMenuViewHolder holder) {
             this.selectedIngredient = selectedIngredient;
+            this.holder = holder;
         }
 
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
             if (!hasFocus) {
+                selectedIngredient.setQuantity(getValidQuantity());
+                selectedIngredient.setName(holder.mDailyMenuIngredientNameEditText.getText().toString());
                 mDailyMenuViewModel.insert(selectedIngredient);
             }
         }
+
+        /**
+         * Parses the quantity. If it's not a number, it will change it to 1 and notify the user.
+         * @return
+         */
+        private int getValidQuantity(){
+            String quantity = holder.mDailyMenuIngredientQuantityEditText.getText().toString();
+            int quantityValue = 1;
+            try {
+                quantityValue = Integer.parseInt(quantity);
+            }catch (NumberFormatException e){
+                Toast toast = Toast.makeText(mInflater.getContext(),
+                        "Invalid Quantity.", Toast.LENGTH_LONG);
+                toast.show();
+                holder.mDailyMenuIngredientQuantityEditText.setText(quantity);
+            }
+           return quantityValue;
+        }
     }
+
+
+
+
 
     public void setIngredients(List<Ingredient> ingredients) {
         mIngredients = ingredients;

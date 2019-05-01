@@ -18,6 +18,7 @@ public class WeeklyMenuListViewModel extends AndroidViewModel {
 
     private LiveData<List<WeeklyMenu>> mAllMenus;
     private LiveData<List<DailyMenu>> mAllDailyMenus;
+    private LiveData<List<DailyMenu>> mSelectedDailyMenu;
     private LiveData<List<Ingredient>> mDailyMenuIngredients;
     private LiveData<List<Ingredient>> mShoppingListIngredients;
     private MutableLiveData<Integer> filterLiveDataByWeeklyMenuId = new MutableLiveData<>();
@@ -29,11 +30,13 @@ public class WeeklyMenuListViewModel extends AndroidViewModel {
         mRepository = new MenuRepository(application);
         mAllMenus = mRepository.getAllMenus();
         mAllDailyMenus = Transformations.switchMap(filterLiveDataByWeeklyMenuId,
-                weeklyMenuId -> mRepository.getDailyMenusById(weeklyMenuId));
-        mDailyMenuIngredients = Transformations.switchMap(filterLiveDataByDailyMenuId,
-                dailyMenuId -> mRepository.getAllDailyIngredientsById(dailyMenuId));
+                weeklyMenuId -> mRepository.getAllDailyMenusByWeeklyMenuId(weeklyMenuId));
         mShoppingListIngredients = Transformations.switchMap(filterLiveDataByWeeklyMenuId,
                 weeklyMenuId -> mRepository.getShoppingListIngredients(weeklyMenuId));
+        mDailyMenuIngredients = Transformations.switchMap(filterLiveDataByDailyMenuId,
+                dailyMenuId -> mRepository.getAllDailyIngredientsById(dailyMenuId));
+        mSelectedDailyMenu = Transformations.switchMap(filterLiveDataByDailyMenuId,
+                dailyMenuId -> mRepository.getDailyMenuById(dailyMenuId));
     }
 
     public void delete(Ingredient ingredient) {

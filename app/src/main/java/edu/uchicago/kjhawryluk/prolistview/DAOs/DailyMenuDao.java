@@ -15,13 +15,6 @@ import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
 @Dao
 public abstract class DailyMenuDao {
 
-//    public LiveData<DailyMenu> getDailyMenuWithIngredients(int id) {
-//        LiveData<DailyMenu> dailyMenu = getDailyMenuById(id);
-//        LiveData<List<Ingredient>> ingredients = getIngredientsById(id);
-//        dailyMenu.getValue().setIngredients(ingredients.getValue());
-//        return dailyMenu;
-//    }
-
     //CREATE
     @Insert
     public abstract long insert(DailyMenu dailyMenu);
@@ -32,15 +25,11 @@ public abstract class DailyMenuDao {
 
     //Read
     @Query("SELECT * from daily_menu_table WHERE mMenuId=:menuId ORDER BY mDate ASC")
-    public abstract LiveData<List<DailyMenu>> getAllDailyMenusByMenuId(int menuId);
+    public abstract LiveData<List<DailyMenu>> getAllDailyMenusByWeeklyMenuId(int menuId);
 
     //Read
-    @Query("SELECT * from daily_menu_table WHERE mMenuId=:id ORDER BY mDate ASC")
-    public abstract LiveData<List<DailyMenu>> getDailyMenusById(int id);
-
-    //Read
-    @Query("SELECT * from daily_menu_table WHERE mId=:id ORDER BY mDate ASC LIMIT 1 ")
-    public abstract DailyMenu getDailyMenuById(int id);
+    @Query("SELECT * from daily_menu_table WHERE mId=:id ORDER BY mDate ASC")
+    public abstract LiveData<List<DailyMenu>> getDailyMenuById(int id);
 
     //Read
     @Query("SELECT * from ingredient_table WHERE mDailyMenuId=:id ORDER BY mName ASC, mQuantity DESC")

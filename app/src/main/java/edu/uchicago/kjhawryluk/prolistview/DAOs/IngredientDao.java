@@ -15,10 +15,10 @@ import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
 public interface IngredientDao {
     //CREATE
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Ingredient ingredient);
+    long insert(Ingredient ingredient);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(List<Ingredient> ingredient);
+    List<Long> insert(List<Ingredient> ingredient);
 
     //DELETE
     @Query("DELETE FROM ingredient_table")
@@ -30,7 +30,7 @@ public interface IngredientDao {
 
     //Read
     @Query("SELECT ingredient_table.mId, ingredient_table.mDailyMenuId,ingredient_table.mName, " +
-            "ingredient_table.mQuantity " +
+            "ingredient_table.mQuantity, ingredient_table.currentlyOwn " +
             "FROM ingredient_table JOIN daily_menu_table ON mDailyMenuId = daily_menu_table.mId " +
             "WHERE daily_menu_table.mMenuId=:menuId and currentlyOwn = 0 " +
             "ORDER BY mName ASC, mQuantity DESC")

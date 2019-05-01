@@ -4,8 +4,6 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import edu.uchicago.kjhawryluk.prolistview.DAOs.DailyMenuDao;
@@ -45,12 +43,12 @@ public class MenuRepository {
     }
 
 
-    public LiveData<List<DailyMenu>> getDailyMenus() {
-        return mDailyMenus;
+    public LiveData<List<DailyMenu>> getAllDailyMenusByWeeklyMenuId(int id) {
+        return mDailyMenuDao.getAllDailyMenusByWeeklyMenuId(id);
     }
 
-    public LiveData<List<DailyMenu>> getDailyMenusById(int id) {
-        return mDailyMenuDao.getDailyMenusById(id);
+    public LiveData<List<DailyMenu>> getDailyMenuById(int id) {
+        return mDailyMenuDao.getDailyMenuById(id);
     }
 
     public LiveData<List<Ingredient>> getAllDailyIngredientsById(int id) {
@@ -95,9 +93,6 @@ public class MenuRepository {
     public void insert(WeeklyMenu weeklyAndDailyMenu) {
         new InsertWeeklyAndDailyMenusAsyncTask(mWeeklyMenuDao).execute(weeklyAndDailyMenu);
     }
-
-
-
 
     private static class InsertWeeklyAndDailyMenusAsyncTask extends AsyncTask<WeeklyMenu, Void, Void> {
 
@@ -154,23 +149,8 @@ public class MenuRepository {
 
         @Override
         protected Void doInBackground(final Ingredient... params) {
-//            List<Ingredient> ingredientsToInsert = new ArrayList(Arrays.asList(params));
-            mAsyncTaskDao.insert(params[0]);
+            params[0].setId((int)mAsyncTaskDao.insert(params[0]));
             return null;
-        }
-    }
-
-    private static class GetDailyMenuAsyncTask extends AsyncTask<Integer, Void, DailyMenu> {
-
-        private DailyMenuDao mAsyncTaskDao;
-
-        GetDailyMenuAsyncTask(DailyMenuDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected DailyMenu doInBackground(Integer... integers) {
-            return mAsyncTaskDao.getDailyMenuById(integers[0]);
         }
     }
 }

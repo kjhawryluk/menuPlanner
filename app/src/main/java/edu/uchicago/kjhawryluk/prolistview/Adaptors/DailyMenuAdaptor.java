@@ -10,10 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
-import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
+import edu.uchicago.kjhawryluk.prolistview.Listeners.EditTextEnterListener;
 import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
 import edu.uchicago.kjhawryluk.prolistview.R;
 import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuListViewModel;
@@ -58,6 +57,10 @@ public class DailyMenuAdaptor extends RecyclerView.Adapter<DailyMenuAdaptor.Dail
             // Update the ingredient name when it changes.
             holder.mDailyMenuIngredientNameEditText.setOnFocusChangeListener(new IngredientFocusListener(current, holder));
             holder.mDailyMenuIngredientQuantityEditText.setOnFocusChangeListener(new IngredientFocusListener(current, holder));
+
+            holder.mDailyMenuIngredientNameEditText.setOnKeyListener(new EditTextEnterListener(holder.mDailyMenuIngredientNameEditText));
+            holder.mDailyMenuIngredientQuantityEditText.setOnKeyListener(new EditTextEnterListener(holder.mDailyMenuIngredientQuantityEditText));
+
 
             //Delete it if the button is clicked.
             holder.mRemoveDailyIngredient.setOnClickListener(new View.OnClickListener() {

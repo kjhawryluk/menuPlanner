@@ -3,6 +3,13 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorBackground">#26A69A</color>
-    <color name="colorFont">#3F51B5</color>
+    <color name="colorBackground">#212121</color>
+    <color name="colorListBackground">#424242</color>
+    <color name="colorListFont">#AB47BC</color>
+    <color name="colorFont">#29B6F6</color>
+    <color name="colorAccentSecondary">#FF5722</color>
+    <color name="colorTextEdit">#FFFFFF</color>
+    <color name="hint">#BDBDBD</color>
+
+
 </resources>

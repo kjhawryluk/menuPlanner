@@ -7,15 +7,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/dailyMenuItem">
+    android:id="@+id/dailyMenuItem"
+    android:layout_marginBottom="5dp">
 
     <TextView
         android:padding="10dp"
         android:id="@+id/dayOfWeekTextView"
-        android:layout_weight="85"
+        android:layout_weight="75"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="@dimen/listFontSize"
+        android:textColor="@color/colorAccentSecondary"
         />
     <TextView
         android:id="@+id/dailyMenuTitleTextView"
@@ -23,7 +25,8 @@
         android:text="TBD (Click to set the menu)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="@dimen/listFontSize"
+        android:textColor="@color/colorListFont"
         />
 </LinearLayout>
     <view

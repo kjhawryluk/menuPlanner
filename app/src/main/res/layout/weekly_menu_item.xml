@@ -12,7 +12,10 @@
     android:layout_weight="75"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:textColor="@android:color/black"
+    android:textSize="@dimen/listFontSize"
+    android:paddingTop="5dp"
+    android:paddingLeft="10dp"
+    android:textColor="@color/colorListFont"
     />
 
     <ImageButton

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import java.util.Date;
 import java.util.List;
 
 import edu.uchicago.kjhawryluk.prolistview.Adaptors.DailyMenuAdaptor;
+import edu.uchicago.kjhawryluk.prolistview.Adaptors.SelectedDailyMenuAdaptor;
+import edu.uchicago.kjhawryluk.prolistview.Listeners.EditTextEnterListener;
 import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
 import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
 import edu.uchicago.kjhawryluk.prolistview.TypeConverters.DateConverter;
@@ -35,7 +38,7 @@ public class DailyMenuFragment extends Fragment {
     private int mMenuId;
     private Date mDailyMenuDate;
     private Button mSeeWeeklyMenuButton;
-    private TextView mDailyMenuDateValueTextView;
+    private RecyclerView mSelectedDailyMenuRecycler;
     private EditText mIngredientsToAddEditText;
     private Button mAddIngredientsButton;
     private RecyclerView mIngredientsRecycler;
@@ -75,7 +78,7 @@ public class DailyMenuFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(WeeklyMenuListViewModel.class);
 
         mSeeWeeklyMenuButton = root.findViewById(R.id.seeWeeklyMenu);
-        mDailyMenuDateValueTextView = root.findViewById(R.id.dailyMenuDateValueTextView);
+        mSelectedDailyMenuRecycler = root.findViewById(R.id.selectedDailyMenuRecycler);
         mIngredientsToAddEditText = root.findViewById(R.id.ingredientsToAdd);
         mAddIngredientsButton = root.findViewById(R.id.addIngredientsButton);
         mIngredientsRecycler = root.findViewById(R.id.dailyMenuIngredientList);
@@ -83,15 +86,15 @@ public class DailyMenuFragment extends Fragment {
         // Format Static Top Of Page
         SimpleDateFormat formatter = new SimpleDateFormat("E MMM dd, yyyy");
         String menuDateStr = formatter.format(mDailyMenuDate);
-        mDailyMenuDateValueTextView.setText(menuDateStr);
 
-//        mIngredientsToAddEditText.setOnFocusChangeListener(
-//                new View.OnFocusChangeListener() {
-//                    @Override
-//                    public void onFocusChange(View v, boolean hasFocus) {
-//                        enableAddIngredientsButton(hasFocus);
-//                    }
-//                });
+        mIngredientsToAddEditText.setOnKeyListener(new EditTextEnterListener(mIngredientsToAddEditText));
+        mIngredientsToAddEditText.setOnFocusChangeListener(
+                new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        enableAddIngredientsButton(hasFocus);
+                    }
+                });
 
                 mAddIngredientsButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -104,6 +107,19 @@ public class DailyMenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getFragmentManager().popBackStack();
+            }
+        });
+
+        //Bind Data to recycler.
+        final SelectedDailyMenuAdaptor selectedDailyMenuAdaptor = new SelectedDailyMenuAdaptor(container.getContext(), mViewModel);
+        mSelectedDailyMenuRecycler.setAdapter(selectedDailyMenuAdaptor);
+        mSelectedDailyMenuRecycler.setLayoutManager(new LinearLayoutManager(container.getContext()));
+
+        mViewModel.getSelectedDailyMenu().observe(this, new Observer<List<DailyMenu>>() {
+            @Override
+            public void onChanged(@Nullable final List<DailyMenu> ingredients) {
+                // Update the cached copy of the words in the adapter.
+                selectedDailyMenuAdaptor.setDailyMenus(ingredients);
             }
         });
 
@@ -121,7 +137,6 @@ public class DailyMenuFragment extends Fragment {
         });
 
         mViewModel.setDailyMenuId(mMenuId);
-
         return root;
     }
 
@@ -138,14 +153,12 @@ public class DailyMenuFragment extends Fragment {
     }
 
     private void enableAddIngredientsButton(boolean hasFocus) {
-        if (!hasFocus) {
             if(mIngredientsToAddEditText.getText().toString().trim().length() > 0)
             {
                 mAddIngredientsButton.setEnabled(true);
             } else{
                 mAddIngredientsButton.setEnabled(false);
             }
-        }
     }
 
 

@@ -94,6 +94,25 @@ public class MenuRepository {
         new InsertWeeklyAndDailyMenusAsyncTask(mWeeklyMenuDao).execute(weeklyAndDailyMenu);
     }
 
+    public void insert(DailyMenu dailyMenu) {
+        new InsertDailyMenuAsyncTask(mDailyMenuDao).execute(dailyMenu);
+    }
+
+    private static class InsertDailyMenuAsyncTask extends AsyncTask<DailyMenu, Void, Void> {
+
+        private DailyMenuDao mAsyncTaskDao;
+
+        InsertDailyMenuAsyncTask(DailyMenuDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final DailyMenu... params) {
+            mAsyncTaskDao.insert(params[0]);
+            return null;
+        }
+    }
+
     private static class InsertWeeklyAndDailyMenusAsyncTask extends AsyncTask<WeeklyMenu, Void, Void> {
 
         private WeeklyMenuDao mAsyncTaskDao;

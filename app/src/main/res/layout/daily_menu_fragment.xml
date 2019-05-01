@@ -14,52 +14,50 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"/>
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/selectedDailyMenuRecycler"
         android:layout_weight="20"
-        android:background="@color/colorFont"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="30dp">
-        <TextView
-            android:textSize="24sp"
-            android:text="Day: "
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        tools:listitem="@layout/daily_menu_ingredient" />
 
-        <TextView
-            android:textSize="24sp"
-            android:id="@+id/dailyMenuDateValueTextView"
-            android:textColor="@color/colorFont"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+
     <LinearLayout
         android:layout_weight="20"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        >
 
     <EditText
         android:id="@+id/ingredientsToAdd"
         android:hint="Enter ingredients separated by commas."
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorFont"
+        android:textColorHint="@color/hint"
+
+        />
 
         <Button
             android:id="@+id/addIngredientsButton"
             android:text="Add Ingredients"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:enabled="false"
+
           />
 
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/dailyMenuIngredientList"
-        android:layout_weight="50"
+        android:layout_weight="70"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray"
+        android:background="@color/colorListBackground"
         tools:listitem="@layout/daily_menu_ingredient" />
 
 </LinearLayout>

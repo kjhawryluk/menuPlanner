@@ -75,6 +75,10 @@ public class WeeklyMenuListViewModel extends AndroidViewModel {
         return mAllDailyMenus;
     }
 
+    public LiveData<List<DailyMenu>> getSelectedDailyMenu() {
+        return mSelectedDailyMenu;
+    }
+
     public LiveData<List<Ingredient>> getShoppingListIngredients() {
         return mShoppingListIngredients;
     }
@@ -90,7 +94,9 @@ public class WeeklyMenuListViewModel extends AndroidViewModel {
     public void insert(WeeklyMenu menu) {
         mRepository.insert(menu);
     }
-
+    public void insert(DailyMenu menu) {
+        mRepository.insert(menu);
+    }
     public void delete(WeeklyMenu menu) {
         mRepository.delete(menu);
     }

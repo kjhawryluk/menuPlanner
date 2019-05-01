@@ -11,10 +11,6 @@ import java.util.List;
 
 import edu.uchicago.kjhawryluk.prolistview.TypeConverters.DateConverter;
 
-//        foreignKeys = @ForeignKey(entity = WeeklyMenuFragment.class,
-//        parentColumns = "mId",
-//        childColumns = "mMenuId",
-//        onDelete = CASCADE))
 @Entity(tableName = "daily_menu_table")
 public class DailyMenu {
     @PrimaryKey(autoGenerate = true)

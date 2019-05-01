@@ -63,6 +63,12 @@ public class ShoppingListFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(WeeklyMenuListViewModel.class);
 
         mSeeWeeklyMenuButton = root.findViewById(R.id.seeWeeklyMenuFromShoppingList);
+        mSeeWeeklyMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().popBackStack();
+            }
+        });
         mShoppingListIngredients = root.findViewById(R.id.shoppingListIngredientList);
 
 

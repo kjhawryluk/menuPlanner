@@ -3,12 +3,14 @@ package edu.uchicago.kjhawryluk.prolistview.Adaptors;
 import android.content.Context;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -19,8 +21,8 @@ import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuListViewModel;
 public class ShoppingListAdaptor extends RecyclerView.Adapter<ShoppingListAdaptor.ShoppingListViewHolder> {
 
     class ShoppingListViewHolder extends RecyclerView.ViewHolder {
-        private final EditText mShoppingListIngredientNameTextView;
-        private final EditText mShoppingListIngredientQuantityTextView;
+        private final TextView mShoppingListIngredientNameTextView;
+        private final TextView mShoppingListIngredientQuantityTextView;
         private final CheckBox mPurchasedCheckBox;
 
         private ShoppingListViewHolder(View itemView) {
@@ -42,7 +44,7 @@ public class ShoppingListAdaptor extends RecyclerView.Adapter<ShoppingListAdapto
 
     @Override
     public ShoppingListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = mInflater.inflate(R.layout.daily_menu_ingredient, parent, false);
+        View itemView = mInflater.inflate(R.layout.shopping_list_ingredient, parent, false);
         return new ShoppingListViewHolder(itemView);
     }
 
@@ -53,6 +55,7 @@ public class ShoppingListAdaptor extends RecyclerView.Adapter<ShoppingListAdapto
             holder.mShoppingListIngredientNameTextView.setText(current.getName());
             holder.mShoppingListIngredientQuantityTextView.setText(String.valueOf(current.getQuantity()));
             holder.mPurchasedCheckBox.setChecked(current.isCurrentlyOwn());
+
             // Update the ingredient name when it changes.
             holder.mPurchasedCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener(
             ) {
@@ -67,16 +70,22 @@ public class ShoppingListAdaptor extends RecyclerView.Adapter<ShoppingListAdapto
                                 holder.mShoppingListIngredientNameTextView.getPaintFlags()
                                         & (~Paint.STRIKE_THRU_TEXT_FLAG));
                     }
-                    current.setCurrentlyOwn(holder.mPurchasedCheckBox.isChecked());
-                    mDailyMenuViewModel.insert(current);
+
+                    // This is how I wanted to save the state, but it had a bug.
+
+//                    current.setCurrentlyOwn(isChecked);
+//                    mDailyMenuViewModel.insert(current);
                 }
             });
 
+        } else{
+            holder.mShoppingListIngredientNameTextView.setText("No Ingredients");
         }
     }
 
     public void setIngredients(List<Ingredient> ingredients) {
         mIngredients = ingredients;
+        notifyDataSetChanged();
     }
 
     public List<Ingredient> getIngredients() {

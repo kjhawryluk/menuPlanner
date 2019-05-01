@@ -74,7 +74,7 @@ public class MenuListAdaptor extends RecyclerView.Adapter<MenuListAdaptor.Weekly
         }
     }
 
-    private void openWeeklyMenu(View view, int menuId, long date) {
+    public static void openWeeklyMenu(View view, int menuId, long date) {
         WeeklyMenuFragment weeklyMenuFragment= WeeklyMenuFragment.newInstance(menuId, date);
         AppCompatActivity activity = (AppCompatActivity) view.getContext();
         activity.getSupportFragmentManager()

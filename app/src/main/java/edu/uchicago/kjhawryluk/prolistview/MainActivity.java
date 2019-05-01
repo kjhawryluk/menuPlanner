@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -74,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 WeeklyMenu weeklyMenu = new WeeklyMenu(new Date(startDateCalendarView.getDate()));
                 mWeeklyMenuListViewModel.insert(weeklyMenu);
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "New menu created",Toast.LENGTH_SHORT);
+                toast.show();
                 dialog.dismiss();
             }
         });
@@ -117,15 +121,5 @@ public class MainActivity extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-//        if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-//            Word word = new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY));
-//            mWordViewModel.insert(word);
-//        } else {
-//            Toast.makeText(
-//                    getApplicationContext(),
-//                    R.string.empty_not_saved,
-//                    Toast.LENGTH_LONG).show();
-//        }
     }
 }

@@ -32,7 +32,7 @@ public interface IngredientDao {
     @Query("SELECT ingredient_table.mId, ingredient_table.mDailyMenuId,ingredient_table.mName, " +
             "ingredient_table.mQuantity, ingredient_table.currentlyOwn " +
             "FROM ingredient_table JOIN daily_menu_table ON mDailyMenuId = daily_menu_table.mId " +
-            "WHERE daily_menu_table.mMenuId=:menuId and currentlyOwn = 0 " +
+            "WHERE daily_menu_table.mMenuId=:menuId " +
             "ORDER BY mName ASC, mQuantity DESC")
     LiveData<List<Ingredient>> getShoppingListIngredients(int menuId);
 

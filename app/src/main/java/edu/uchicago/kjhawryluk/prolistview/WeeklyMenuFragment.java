@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -68,10 +69,6 @@ public class WeeklyMenuFragment extends Fragment {
         View root = inflater.inflate(R.layout.weekly_menu_fragment, container, false);
         mViewModel = ViewModelProviders.of(this).get(WeeklyMenuListViewModel.class);
 
-//        mViewModel = ViewModelProviders.of(this,
-//                new WeeklyMenuViewModel(getActivity().getApplication(), mMenuId))
-//                .get(WeeklyMenuViewModel.class);
-
         shoppingListButton = root.findViewById(R.id.seeShoppingListButton);
         menuDateValueTextView = root.findViewById(R.id.menuDateValueTextView);
         dailyMenuList = root.findViewById(R.id.dailyMenuList);
@@ -84,11 +81,10 @@ public class WeeklyMenuFragment extends Fragment {
         shoppingListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(container.getContext(),
-                        "Opening Shopping List", Toast.LENGTH_LONG);
-                toast.show();
+                openShoppingList(v, mMenuId);
             }
         });
+
 
         //Bind Data to recycler.
         final WeeklyMenuAdaptor adapter = new WeeklyMenuAdaptor(container.getContext(), mViewModel);
@@ -107,5 +103,13 @@ public class WeeklyMenuFragment extends Fragment {
         return root;
     }
 
-
+    private void openShoppingList(View view, int menuId) {
+        ShoppingListFragment shoppingListFragment= ShoppingListFragment.newInstance(menuId);
+        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+        activity.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.contentBody, shoppingListFragment)
+                .addToBackStack(null)
+                .commit();
+    }
 }

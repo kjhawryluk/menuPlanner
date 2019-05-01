@@ -16,7 +16,7 @@ import java.util.List;
 import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
 import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
 import edu.uchicago.kjhawryluk.prolistview.R;
-import edu.uchicago.kjhawryluk.prolistview.ViewModels.DailyMenuViewModel;
+import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuListViewModel;
 
 public class DailyMenuAdaptor extends RecyclerView.Adapter<DailyMenuAdaptor.DailyMenuViewHolder> {
 
@@ -35,9 +35,9 @@ public class DailyMenuAdaptor extends RecyclerView.Adapter<DailyMenuAdaptor.Dail
 
     private final LayoutInflater mInflater;
     private List<Ingredient> mIngredients; // Cached copy of menus
-    private DailyMenuViewModel mDailyMenuViewModel;
+    private WeeklyMenuListViewModel mDailyMenuViewModel;
 
-    public DailyMenuAdaptor(Context context, DailyMenuViewModel dailyMenuViewHolder) {
+    public DailyMenuAdaptor(Context context, WeeklyMenuListViewModel dailyMenuViewHolder) {
         mInflater = LayoutInflater.from(context);
         mDailyMenuViewModel = dailyMenuViewHolder;
     }

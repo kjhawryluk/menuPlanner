@@ -25,13 +25,13 @@ import edu.uchicago.kjhawryluk.prolistview.Adaptors.DailyMenuAdaptor;
 import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
 import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
 import edu.uchicago.kjhawryluk.prolistview.TypeConverters.DateConverter;
-import edu.uchicago.kjhawryluk.prolistview.ViewModels.DailyMenuViewModel;
+import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuListViewModel;
 
 public class DailyMenuFragment extends Fragment {
 
     public static final String DAILY_MENU_ID = "DAILY_MENU_ID";
     public static final String DAILY_MENU_DATE = "DAILY_MENU_DATE";
-    private DailyMenuViewModel mViewModel;
+    private WeeklyMenuListViewModel mViewModel;
     private int mMenuId;
     private Date mDailyMenuDate;
     private Button mSeeWeeklyMenuButton;
@@ -72,9 +72,7 @@ public class DailyMenuFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.daily_menu_fragment, container, false);
 
-        mViewModel = ViewModelProviders.of(this,
-                new DailyMenuViewModel(getActivity().getApplication(), mMenuId))
-                .get(DailyMenuViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(WeeklyMenuListViewModel.class);
 
         mSeeWeeklyMenuButton = root.findViewById(R.id.seeWeeklyMenu);
         mDailyMenuDateValueTextView = root.findViewById(R.id.dailyMenuDateValueTextView);
@@ -114,7 +112,7 @@ public class DailyMenuFragment extends Fragment {
         mIngredientsRecycler.setAdapter(adapter);
         mIngredientsRecycler.setLayoutManager(new LinearLayoutManager(container.getContext()));
 
-        mViewModel.getAllIngredients().observe(this, new Observer<List<Ingredient>>() {
+        mViewModel.getDailyMenuIngredients().observe(this, new Observer<List<Ingredient>>() {
             @Override
             public void onChanged(@Nullable final List<Ingredient> ingredients) {
                 // Update the cached copy of the words in the adapter.
@@ -122,7 +120,7 @@ public class DailyMenuFragment extends Fragment {
             }
         });
 
-
+        mViewModel.setDailyMenuId(mMenuId);
 
         return root;
     }

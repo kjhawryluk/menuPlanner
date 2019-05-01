@@ -10,6 +10,7 @@ import java.util.List;
 
 import edu.uchicago.kjhawryluk.prolistview.MenuRepository;
 import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
+import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
 import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
 
 public class WeeklyMenuListViewModel extends AndroidViewModel {
@@ -17,7 +18,8 @@ public class WeeklyMenuListViewModel extends AndroidViewModel {
 
     private LiveData<List<WeeklyMenu>> mAllMenus;
     private LiveData<List<DailyMenu>> mAllDailyMenus;
-
+    private LiveData<List<Ingredient>> mDailyMenuIngredients;
+    private LiveData<List<Ingredient>> mShoppingListIngredients;
     private MutableLiveData<Integer> filterLiveDataByWeeklyMenuId = new MutableLiveData<>();
     private MutableLiveData<Integer> filterLiveDataByDailyMenuId = new MutableLiveData<>();
 
@@ -28,6 +30,15 @@ public class WeeklyMenuListViewModel extends AndroidViewModel {
         mAllMenus = mRepository.getAllMenus();
         mAllDailyMenus = Transformations.switchMap(filterLiveDataByWeeklyMenuId,
                 weeklyMenuId -> mRepository.getDailyMenusById(weeklyMenuId));
+        mDailyMenuIngredients = Transformations.switchMap(filterLiveDataByDailyMenuId,
+           dailyMenuId ->   mRepository.getAllDailyIngredientsById(dailyMenuId));
+    }
+
+    public void delete(Ingredient ingredient) { mRepository.delete(ingredient);}
+    public void insert(Ingredient ingredient) { mRepository.insert(ingredient); }
+    public void insert(Ingredient[] ingredient) { mRepository.insert(ingredient); }
+    public LiveData<List<Ingredient>> getDailyMenuIngredients() {
+        return mDailyMenuIngredients;
     }
 
     public LiveData<List<WeeklyMenu>> getAllMenus() {

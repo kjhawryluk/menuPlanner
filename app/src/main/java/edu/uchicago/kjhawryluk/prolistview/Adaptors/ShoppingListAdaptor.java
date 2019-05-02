@@ -56,25 +56,27 @@ public class ShoppingListAdaptor extends RecyclerView.Adapter<ShoppingListAdapto
             holder.mShoppingListIngredientQuantityTextView.setText(String.valueOf(current.getQuantity()));
             holder.mPurchasedCheckBox.setChecked(current.isCurrentlyOwn());
 
+
+            //TODO Below checks/unchecks multiple items, when it should only be doing one.
+            if (current.isCurrentlyOwn()) {
+                holder.mShoppingListIngredientNameTextView.setPaintFlags(
+                        holder.mShoppingListIngredientNameTextView.getPaintFlags()
+                                | Paint.STRIKE_THRU_TEXT_FLAG);
+            } else {
+                holder.mShoppingListIngredientNameTextView.setPaintFlags(
+                        holder.mShoppingListIngredientNameTextView.getPaintFlags()
+                                & (~Paint.STRIKE_THRU_TEXT_FLAG));
+            }
             // Update the ingredient name when it changes.
             holder.mPurchasedCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener(
             ) {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        holder.mShoppingListIngredientNameTextView.setPaintFlags(
-                                holder.mShoppingListIngredientNameTextView.getPaintFlags()
-                                        | Paint.STRIKE_THRU_TEXT_FLAG);
-                    } else {
-                        holder.mShoppingListIngredientNameTextView.setPaintFlags(
-                                holder.mShoppingListIngredientNameTextView.getPaintFlags()
-                                        & (~Paint.STRIKE_THRU_TEXT_FLAG));
-                    }
 
-                    // This is how I wanted to save the state, but it had a bug.
-
-//                    current.setCurrentlyOwn(isChecked);
-//                    mDailyMenuViewModel.insert(current);
+                    // Changes the owned status upon checking and above handles crossing
+                    // out the item.
+                    current.setCurrentlyOwn(isChecked);
+                    mDailyMenuViewModel.insert(current);
                 }
             });
 

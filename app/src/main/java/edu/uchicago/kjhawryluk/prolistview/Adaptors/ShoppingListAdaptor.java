@@ -54,10 +54,14 @@ public class ShoppingListAdaptor extends RecyclerView.Adapter<ShoppingListAdapto
             final Ingredient current = mIngredients.get(position);
             holder.mShoppingListIngredientNameTextView.setText(current.getName());
             holder.mShoppingListIngredientQuantityTextView.setText(String.valueOf(current.getQuantity()));
+            //in some cases, it will prevent unwanted situations
+            holder.mPurchasedCheckBox.setOnCheckedChangeListener(null);
+
+            //if true, your checkbox will be selected, else unselected
             holder.mPurchasedCheckBox.setChecked(current.isCurrentlyOwn());
 
 
-            //TODO Below checks/unchecks multiple items, when it should only be doing one.
+            //Cross out ingredient.
             if (current.isCurrentlyOwn()) {
                 holder.mShoppingListIngredientNameTextView.setPaintFlags(
                         holder.mShoppingListIngredientNameTextView.getPaintFlags()
@@ -68,16 +72,11 @@ public class ShoppingListAdaptor extends RecyclerView.Adapter<ShoppingListAdapto
                                 & (~Paint.STRIKE_THRU_TEXT_FLAG));
             }
             // Update the ingredient name when it changes.
-            holder.mPurchasedCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener(
-            ) {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                    // Changes the owned status upon checking and above handles crossing
-                    // out the item.
-                    current.setCurrentlyOwn(isChecked);
-                    mDailyMenuViewModel.insert(current);
-                }
+            holder.mPurchasedCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                // Changes the owned status upon checking and above handles crossing
+                // out the item.
+                current.setCurrentlyOwn(isChecked);
+                mDailyMenuViewModel.insert(current);
             });
 
         } else {

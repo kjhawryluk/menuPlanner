@@ -1,4 +1,4 @@
-package edu.uchicago.kjhawryluk.prolistview;
+package edu.uchicago.kjhawryluk.menuPlanner;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -14,16 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import edu.uchicago.kjhawryluk.prolistview.Adaptors.WeeklyMenuAdaptor;
-import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
-import edu.uchicago.kjhawryluk.prolistview.TypeConverters.DateConverter;
-import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuListViewModel;
+import edu.uchicago.kjhawryluk.menuPlanner.Adaptors.WeeklyMenuAdaptor;
+import edu.uchicago.kjhawryluk.menuPlanner.Models.DailyMenu;
+import edu.uchicago.kjhawryluk.menuPlanner.R;
+import edu.uchicago.kjhawryluk.menuPlanner.TypeConverters.DateConverter;
+import edu.uchicago.kjhawryluk.menuPlanner.ViewModels.WeeklyMenuListViewModel;
 
 public class WeeklyMenuFragment extends Fragment {
 

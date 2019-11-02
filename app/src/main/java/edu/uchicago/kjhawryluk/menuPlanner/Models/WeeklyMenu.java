@@ -1,4 +1,4 @@
-package edu.uchicago.kjhawryluk.prolistview.Models;
+package edu.uchicago.kjhawryluk.menuPlanner.Models;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import edu.uchicago.kjhawryluk.prolistview.TypeConverters.DateConverter;
+import edu.uchicago.kjhawryluk.menuPlanner.TypeConverters.DateConverter;
 
 @Entity(tableName = "weekly_menu_table")
 public class WeeklyMenu implements Serializable {

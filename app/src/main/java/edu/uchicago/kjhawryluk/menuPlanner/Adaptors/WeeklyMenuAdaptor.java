@@ -1,24 +1,21 @@
-package edu.uchicago.kjhawryluk.prolistview.Adaptors;
+package edu.uchicago.kjhawryluk.menuPlanner.Adaptors;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import edu.uchicago.kjhawryluk.prolistview.DailyMenuFragment;
-import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
-import edu.uchicago.kjhawryluk.prolistview.R;
-import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuListViewModel;
-import edu.uchicago.kjhawryluk.prolistview.WeeklyMenuFragment;
+import edu.uchicago.kjhawryluk.menuPlanner.DailyMenuFragment;
+import edu.uchicago.kjhawryluk.menuPlanner.ViewModels.WeeklyMenuListViewModel;
+import edu.uchicago.kjhawryluk.menuPlanner.Models.DailyMenu;
+import edu.uchicago.kjhawryluk.menuPlanner.R;
 
 public class WeeklyMenuAdaptor extends RecyclerView.Adapter<WeeklyMenuAdaptor.WeeklyMenuViewHolder> {
 

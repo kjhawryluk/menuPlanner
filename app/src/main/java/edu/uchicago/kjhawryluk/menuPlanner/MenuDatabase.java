@@ -1,4 +1,4 @@
-package edu.uchicago.kjhawryluk.prolistview;
+package edu.uchicago.kjhawryluk.menuPlanner;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Room;
@@ -14,12 +14,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import edu.uchicago.kjhawryluk.prolistview.DAOs.DailyMenuDao;
-import edu.uchicago.kjhawryluk.prolistview.DAOs.IngredientDao;
-import edu.uchicago.kjhawryluk.prolistview.DAOs.WeeklyMenuDao;
-import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
-import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
-import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
+import edu.uchicago.kjhawryluk.menuPlanner.DAOs.DailyMenuDao;
+import edu.uchicago.kjhawryluk.menuPlanner.DAOs.IngredientDao;
+import edu.uchicago.kjhawryluk.menuPlanner.DAOs.WeeklyMenuDao;
+import edu.uchicago.kjhawryluk.menuPlanner.Models.DailyMenu;
+import edu.uchicago.kjhawryluk.menuPlanner.Models.Ingredient;
+import edu.uchicago.kjhawryluk.menuPlanner.Models.WeeklyMenu;
 
 @Database(entities = {
         WeeklyMenu.class,

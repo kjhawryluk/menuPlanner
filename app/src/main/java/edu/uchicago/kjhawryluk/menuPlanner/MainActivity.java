@@ -1,4 +1,4 @@
-package edu.uchicago.kjhawryluk.prolistview;
+package edu.uchicago.kjhawryluk.menuPlanner;
 
 import android.app.Dialog;
 import android.arch.lifecycle.Observer;
@@ -23,9 +23,10 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import edu.uchicago.kjhawryluk.prolistview.Adaptors.MenuListAdaptor;
-import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
-import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuListViewModel;
+import edu.uchicago.kjhawryluk.menuPlanner.ViewModels.WeeklyMenuListViewModel;
+import edu.uchicago.kjhawryluk.menuPlanner.Adaptors.MenuListAdaptor;
+import edu.uchicago.kjhawryluk.menuPlanner.Models.WeeklyMenu;
+import edu.uchicago.kjhawryluk.menuPlanner.R;
 
 public class MainActivity extends AppCompatActivity {
     private WeeklyMenuListViewModel mWeeklyMenuListViewModel;

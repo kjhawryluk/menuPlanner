@@ -1,22 +1,19 @@
-package edu.uchicago.kjhawryluk.prolistview.Adaptors;
+package edu.uchicago.kjhawryluk.menuPlanner.Adaptors;
 
 import android.content.Context;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.List;
 
-import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
-import edu.uchicago.kjhawryluk.prolistview.R;
-import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuListViewModel;
+import edu.uchicago.kjhawryluk.menuPlanner.ViewModels.WeeklyMenuListViewModel;
+import edu.uchicago.kjhawryluk.menuPlanner.Models.Ingredient;
+import edu.uchicago.kjhawryluk.menuPlanner.R;
 
 public class ShoppingListAdaptor extends RecyclerView.Adapter<ShoppingListAdaptor.ShoppingListViewHolder> {
 

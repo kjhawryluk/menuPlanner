@@ -1,4 +1,4 @@
-package edu.uchicago.kjhawryluk.prolistview.TypeConverters;
+package edu.uchicago.kjhawryluk.menuPlanner.TypeConverters;
 
 import android.arch.persistence.room.TypeConverter;
 

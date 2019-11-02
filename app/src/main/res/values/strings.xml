@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">proListView</string>
+    <string name="app_name">Menu Planner</string>
     <string name="menu_add_new_menu">Add New Menu</string>
 </resources>

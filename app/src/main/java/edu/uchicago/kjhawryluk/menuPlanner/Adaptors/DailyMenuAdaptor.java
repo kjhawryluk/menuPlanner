@@ -1,4 +1,4 @@
-package edu.uchicago.kjhawryluk.prolistview.Adaptors;
+package edu.uchicago.kjhawryluk.menuPlanner.Adaptors;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -14,10 +14,10 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import edu.uchicago.kjhawryluk.prolistview.Listeners.EditTextEnterListener;
-import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
-import edu.uchicago.kjhawryluk.prolistview.R;
-import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuListViewModel;
+import edu.uchicago.kjhawryluk.menuPlanner.Listeners.EditTextEnterListener;
+import edu.uchicago.kjhawryluk.menuPlanner.ViewModels.WeeklyMenuListViewModel;
+import edu.uchicago.kjhawryluk.menuPlanner.Models.Ingredient;
+import edu.uchicago.kjhawryluk.menuPlanner.R;
 
 public class DailyMenuAdaptor extends RecyclerView.Adapter<DailyMenuAdaptor.DailyMenuViewHolder> {
 

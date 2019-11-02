@@ -1,4 +1,4 @@
-package edu.uchicago.kjhawryluk.prolistview;
+package edu.uchicago.kjhawryluk.menuPlanner;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -7,25 +7,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import edu.uchicago.kjhawryluk.prolistview.Adaptors.DailyMenuAdaptor;
-import edu.uchicago.kjhawryluk.prolistview.Adaptors.SelectedDailyMenuAdaptor;
-import edu.uchicago.kjhawryluk.prolistview.Adaptors.ShoppingListAdaptor;
-import edu.uchicago.kjhawryluk.prolistview.Listeners.EditTextEnterListener;
-import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
-import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
-import edu.uchicago.kjhawryluk.prolistview.TypeConverters.DateConverter;
-import edu.uchicago.kjhawryluk.prolistview.ViewModels.WeeklyMenuListViewModel;
+import edu.uchicago.kjhawryluk.menuPlanner.Adaptors.ShoppingListAdaptor;
+import edu.uchicago.kjhawryluk.menuPlanner.Models.Ingredient;
+import edu.uchicago.kjhawryluk.menuPlanner.R;
+import edu.uchicago.kjhawryluk.menuPlanner.ViewModels.WeeklyMenuListViewModel;
 
 public class ShoppingListFragment extends Fragment {
 

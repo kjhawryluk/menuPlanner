@@ -1,4 +1,4 @@
-package edu.uchicago.kjhawryluk.prolistview.DAOs;
+package edu.uchicago.kjhawryluk.menuPlanner.DAOs;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -8,9 +8,8 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
-import edu.uchicago.kjhawryluk.prolistview.Models.DailyMenu;
-import edu.uchicago.kjhawryluk.prolistview.Models.Ingredient;
-import edu.uchicago.kjhawryluk.prolistview.Models.WeeklyMenu;
+import edu.uchicago.kjhawryluk.menuPlanner.Models.WeeklyMenu;
+import edu.uchicago.kjhawryluk.menuPlanner.Models.DailyMenu;
 
 @Dao
 public abstract class WeeklyMenuDao {
